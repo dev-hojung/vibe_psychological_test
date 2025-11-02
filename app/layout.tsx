@@ -16,34 +16,42 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isProduction = process.env.NODE_ENV === "production";
+
   return (
     <html lang="en">
       <head>
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2248445708639121"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        {isProduction && (
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2248445708639121"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
       </head>
       <body className="antialiased">
-        <div className="w-full" style={{ minHeight: "100px" }}>
-          <AdSense
-            style={{ display: "block" }}
-            format="auto"
-            responsive={true}
-            className="w-full"
-          />
-        </div>
+        {isProduction && (
+          <div className="w-full" style={{ minHeight: "100px" }}>
+            <AdSense
+              style={{ display: "block" }}
+              format="auto"
+              responsive={true}
+              className="w-full"
+            />
+          </div>
+        )}
         {children}
-        <div className="w-full" style={{ minHeight: "100px" }}>
-          <AdSense
-            style={{ display: "block" }}
-            format="auto"
-            responsive={true}
-            className="w-full"
-          />
-        </div>
+        {isProduction && (
+          <div className="w-full" style={{ minHeight: "100px" }}>
+            <AdSense
+              style={{ display: "block" }}
+              format="auto"
+              responsive={true}
+              className="w-full"
+            />
+          </div>
+        )}
       </body>
     </html>
   );

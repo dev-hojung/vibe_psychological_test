@@ -31,13 +31,6 @@ export default function TestsPage() {
 
   return (
     <div className="min-h-screen bg-slate-950/4 dark:bg-slate-950">
-      <Script
-        id="breadcrumb-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema),
-        }}
-      />
       <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-20 px-6 py-16 sm:px-12 lg:px-16">
         <section className="rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-800 p-10 text-white shadow-xl shadow-indigo-500/20">
           <div className="flex flex-col gap-6">

@@ -18,9 +18,10 @@ export default function AdSense({
   className = "",
 }: AdSenseProps) {
   const adsenseId = "ca-pub-2248445708639121";
+  const isProduction = process.env.NODE_ENV === "production";
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && isProduction) {
       try {
         ((window as any).adsbygoogle = (window as any).adsbygoogle || []).push(
           {}
@@ -29,7 +30,11 @@ export default function AdSense({
         console.error("AdSense error:", err);
       }
     }
-  }, []);
+  }, [isProduction]);
+
+  if (!isProduction) {
+    return null;
+  }
 
   return (
     <ins
