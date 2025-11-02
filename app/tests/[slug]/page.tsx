@@ -34,12 +34,19 @@ export async function generateMetadata({
   const url = `${siteUrl}/tests/${slug}`;
 
   return {
-    title: test.title,
-    description: test.summary,
-    keywords: test.tags,
+    title: `${test.title} | 심심풀이 심리 테스트`,
+    description: `${test.summary} 심심풀이 심리 테스트와 성격 테스트로 자기 이해를 깊이 파악하세요.`,
+    keywords: [
+      ...test.tags,
+      "심리 테스트",
+      "성격 테스트",
+      "심심풀이",
+      "심심풀이 테스트",
+      "무료 심리 테스트",
+    ],
     openGraph: {
-      title: test.title,
-      description: test.summary,
+      title: `${test.title} | 심심풀이 심리 테스트`,
+      description: `${test.summary} 무료 온라인 심리 검사와 성격 테스트를 제공합니다.`,
       url,
       type: "website",
       images: [
@@ -53,8 +60,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: test.title,
-      description: test.summary,
+      title: `${test.title} | 심심풀이 심리 테스트`,
+      description: `${test.summary} 무료 온라인 심리 검사와 성격 테스트를 제공합니다.`,
       images: [`${siteUrl}/og-image.png`],
     },
     alternates: {

@@ -7,11 +7,13 @@ export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Psychological Test Lab",
+    name: "심심풀이 심리 테스트",
+    alternateName: "Psychological Test Lab",
     url: siteUrl,
     description:
-      "정확하고 전문적인 심리 검사로 자기 이해를 깊이 파악하는 서비스",
+      "무료 심심풀이 심리 테스트와 성격 테스트를 제공하는 서비스. 심심할 때 해보는 온라인 심리 검사를 제공합니다.",
     logo: `${siteUrl}/logo.png`,
+    keywords: "심리 테스트, 성격 테스트, 심심풀이, 심심풀이 테스트, 무료 심리 테스트",
   };
 }
 
@@ -19,10 +21,12 @@ export function generateWebsiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Psychological Test Lab",
+    name: "심심풀이 심리 테스트",
+    alternateName: "Psychological Test Lab",
     url: siteUrl,
     description:
-      "정확하고 전문적인 심리 검사로 자기 이해를 깊이 파악하세요. 스트레스 체크, 진로 가치관 탐색, 애착 유형 테스트, 리더십 진단 등 다양한 심리 검사를 제공합니다.",
+      "무료 심심풀이 심리 테스트와 성격 테스트를 제공합니다. 스트레스 체크, 진로 가치관 탐색, 애착 유형, 리더십 진단 등 다양한 심심풀이 테스트를 제공합니다.",
+    keywords: "심리 테스트, 성격 테스트, 심심풀이, 심심풀이 테스트, 무료 심리 테스트, 온라인 심리 검사",
     potentialAction: {
       "@type": "SearchAction",
       target: {

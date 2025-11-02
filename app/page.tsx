@@ -10,13 +10,23 @@ const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://psychology-lab.example";
 
 export const metadata: Metadata = {
-  title: "홈",
+  title: "심심풀이 심리 테스트 | 성격 테스트 무료",
   description:
-    "정확하고 전문적인 심리 검사로 자기 이해를 깊이 파악하세요. 스트레스 체크, 진로 가치관 탐색, 애착 유형 테스트, 리더십 진단 등 다양한 심리 검사를 제공합니다.",
+    "심심할 때 해보는 무료 심리 테스트와 성격 테스트. 스트레스 체크, 진로 가치관 탐색, 애착 유형, 리더십 진단 등 다양한 심심풀이 테스트를 제공합니다. 전문적인 심리 검사로 자기 이해를 깊이 파악하세요.",
+  keywords: [
+    "심리 테스트",
+    "성격 테스트",
+    "심심풀이",
+    "심심풀이 테스트",
+    "무료 심리 테스트",
+    "온라인 심리 검사",
+    "심리 검사",
+    "성향 테스트",
+  ],
   openGraph: {
-    title: "Psychological Test Lab | 심리 검사 및 자기 이해 테스트",
+    title: "심심풀이 심리 테스트 | 성격 테스트 무료",
     description:
-      "정확하고 전문적인 심리 검사로 자기 이해를 깊이 파악하세요. 다양한 심리 검사를 제공합니다.",
+      "심심할 때 해보는 무료 심리 테스트와 성격 테스트. 다양한 심심풀이 테스트를 제공합니다.",
     url: siteUrl,
     type: "website",
   },
@@ -50,11 +60,10 @@ export default function Home() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
-                지금 인기 있는 테스트
+                인기 심심풀이 심리 테스트
               </h1>
               <p className="text-sm text-slate-600 dark:text-slate-300">
-                가장 많이 찾는 검사 3가지를 먼저 소개드릴게요. 더 많은 검사는
-                전체 보기에서 확인할 수 있습니다.
+                심심할 때 해보는 무료 성격 테스트와 심리 테스트를 제공합니다. 가장 많이 찾는 심심풀이 검사 3가지를 먼저 소개드릴게요. 더 많은 심리 테스트는 전체 보기에서 확인할 수 있습니다.
               </p>
             </div>
             <Link
