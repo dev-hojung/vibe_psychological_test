@@ -12,8 +12,13 @@ export function generateOrganizationSchema() {
     url: siteUrl,
     description:
       "무료 심심풀이 심리 테스트와 성격 테스트를 제공하는 서비스. 심심할 때 해보는 온라인 심리 검사를 제공합니다.",
-    logo: `${siteUrl}/logo.png`,
-    keywords: "심리 테스트, 성격 테스트, 심심풀이, 심심풀이 테스트, 무료 심리 테스트",
+    logo: {
+      "@type": "ImageObject",
+      url: `${siteUrl}/logo.png`,
+      width: 512,
+      height: 512,
+    },
+    sameAs: [],
   };
 }
 
@@ -26,15 +31,15 @@ export function generateWebsiteSchema() {
     url: siteUrl,
     description:
       "무료 심심풀이 심리 테스트와 성격 테스트를 제공합니다. 스트레스 체크, 진로 가치관 탐색, 애착 유형, 리더십 진단 등 다양한 심심풀이 테스트를 제공합니다.",
-    keywords: "심리 테스트, 성격 테스트, 심심풀이, 심심풀이 테스트, 무료 심리 테스트, 온라인 심리 검사",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${siteUrl}/tests?search={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
+    // 검색 기능이 실제로 구현되어 있을 때만 potentialAction 추가
+    // potentialAction: {
+    //   "@type": "SearchAction",
+    //   target: {
+    //     "@type": "EntryPoint",
+    //     urlTemplate: `${siteUrl}/tests?search={search_term_string}`,
+    //   },
+    //   "query-input": "required name=search_term_string",
+    // },
   };
 }
 
@@ -43,7 +48,7 @@ export function generateTestSchema(test: TestDetail) {
 
   return {
     "@context": "https://schema.org",
-    "@type": "PsychologicalTest",
+    "@type": "Assessment", // PsychologicalTest는 표준 타입이 아니므로 Assessment 사용
     name: test.title,
     description: test.summary,
     url: testUrl,
@@ -51,16 +56,16 @@ export function generateTestSchema(test: TestDetail) {
       "@type": "Thing",
       name: test.category,
     },
-    keywords: test.tags.join(", "),
     timeRequired: test.meta.duration,
     educationalLevel: "General",
     learningResourceType: "Assessment",
     inLanguage: "ko-KR",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.5",
-      reviewCount: "100",
-    },
+    // aggregateRating은 실제 평점 데이터가 있을 때만 추가
+    // aggregateRating: {
+    //   "@type": "AggregateRating",
+    //   ratingValue: "4.5",
+    //   reviewCount: "100",
+    // },
   };
 }
 
