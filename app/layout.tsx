@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import AdSense from "@/components/AdSense";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,7 +15,33 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2248445708639121"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+      </head>
+      <body className="antialiased">
+        <div className="w-full" style={{ minHeight: "100px" }}>
+          <AdSense
+            style={{ display: "block" }}
+            format="auto"
+            responsive={true}
+            className="w-full"
+          />
+        </div>
+        {children}
+        <div className="w-full" style={{ minHeight: "100px" }}>
+          <AdSense
+            style={{ display: "block" }}
+            format="auto"
+            responsive={true}
+            className="w-full"
+          />
+        </div>
+      </body>
     </html>
   );
 }
