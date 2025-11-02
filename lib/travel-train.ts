@@ -165,7 +165,7 @@ export const travelTrainTest: TravelTrainTest = {
     {
       id: "wander-rabbit",
       label: "즉흥 토끼",
-      rule: "spont > plan && (city >= nature ? spont - plan >= 1 : true)",
+      rule: "spont > plan",
       caption: "지금, 여기, 설렘을 향해 점프!",
       imagePrompt:
         "free-spirited rabbit on open-air carriage, fluttering map, wind stream",
@@ -261,7 +261,7 @@ export const travelTrainTest: TravelTrainTest = {
     {
       id: "healing-bear",
       label: "힐링 곰",
-      rule: "nature > city && plan <= spont + 1 && foodie <= active + 1",
+      rule: "nature > city && plan <= spont + 1 && foodie <= active + 1 && active <= foodie + 1",
       caption: "쉬어가기 위해 떠나는 여행, 템포를 낮춰요.",
       imagePrompt:
         "relaxed bear sipping tea on forest carriage, soft blanket, pinecones",
@@ -351,11 +351,46 @@ export function findTravelProfile(
     });
   });
 
-  // 규칙에 맞는 프로파일 찾기
-  for (const profile of profiles) {
-    if (evaluateRule(profile.rule, scores)) {
-      return profile;
+  // 모든 매칭되는 프로파일 찾기
+  const matchedProfiles = profiles.filter((profile) =>
+    evaluateRule(profile.rule, scores)
+  );
+
+  // 매칭된 프로파일이 있으면 점수 기반 우선순위로 선택
+  // 우선순위: planner-cat > foodie-panda > healing-bear > explorer-raccoon > wander-rabbit
+  if (matchedProfiles.length > 0) {
+    // 1. planner-cat이 매칭되면 우선 (plan 기반, 도시+미식 중심)
+    const plannerCat = matchedProfiles.find((p) => p.id === "planner-cat");
+    if (plannerCat) {
+      return plannerCat;
     }
+
+    // 2. foodie-panda가 매칭되면 우선 (foodie가 가장 높을 때)
+    const foodiePanda = matchedProfiles.find((p) => p.id === "foodie-panda");
+    if (foodiePanda) {
+      return foodiePanda;
+    }
+
+    // 3. healing-bear가 매칭되면 우선 (nature 기반, 힐링 중심)
+    const healingBear = matchedProfiles.find((p) => p.id === "healing-bear");
+    if (healingBear) {
+      return healingBear;
+    }
+
+    // 4. explorer-raccoon이 매칭되면 우선 (active > foodie && nature 중심)
+    const explorerRaccoon = matchedProfiles.find((p) => p.id === "explorer-raccoon");
+    if (explorerRaccoon) {
+      return explorerRaccoon;
+    }
+
+    // 5. wander-rabbit이 매칭되면 선택 (spont > plan)
+    const wanderRabbit = matchedProfiles.find((p) => p.id === "wander-rabbit");
+    if (wanderRabbit) {
+      return wanderRabbit;
+    }
+
+    // 첫 번째 매칭된 프로파일 반환
+    return matchedProfiles[0];
   }
 
   // 규칙 매칭 실패 시 기본 로직 (최대 점수 기준)
@@ -380,3 +415,4 @@ export function findTravelProfile(
 
   return profiles[0];
 }
+

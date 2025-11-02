@@ -3,7 +3,8 @@ import Script from "next/script";
 import AdSense from "@/components/AdSense";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://psychology-lab.example";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://psychology-lab.example";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -43,8 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "심심풀이 심리 테스트 | 성격 테스트 무료",
-    description:
-      "무료 심심풀이 심리 테스트와 성격 테스트를 해보세요.",
+    description: "무료 심심풀이 심리 테스트와 성격 테스트를 해보세요.",
   },
   robots: {
     index: true,
@@ -87,29 +87,7 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body className="antialiased">
-        {isProduction && (
-          <div className="w-full" style={{ minHeight: "100px" }}>
-            <AdSense
-              style={{ display: "block" }}
-              format="auto"
-              responsive={true}
-              className="w-full"
-            />
-          </div>
-        )}
-        {children}
-        {isProduction && (
-          <div className="w-full" style={{ minHeight: "100px" }}>
-            <AdSense
-              style={{ display: "block" }}
-              format="auto"
-              responsive={true}
-              className="w-full"
-            />
-          </div>
-        )}
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
