@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import AdSense from "@/components/AdSense";
 import "./globals.css";
 
 const siteUrl =
