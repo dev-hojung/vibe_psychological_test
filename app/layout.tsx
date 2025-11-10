@@ -65,6 +65,8 @@ export const metadata: Metadata = {
   other: {
     "google-adsense-account": "ca-pub-2248445708639121",
   },
+  // Google AdSense 메타 태그 명시적 추가
+  // metadata.other가 자동으로 <meta name="google-adsense-account" content="..."> 생성
 };
 
 export default function RootLayout({
@@ -72,19 +74,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isProduction = process.env.NODE_ENV === "production";
-
   return (
     <html lang="ko">
       <head>
-        {isProduction && (
-          <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2248445708639121"
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
-          />
-        )}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2248445708639121"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
       <body className="antialiased">{children}</body>
     </html>
