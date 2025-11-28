@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     canonical: siteUrl,
   },
   other: {
-    "google-adsense-account": "ca-pub-2248445708639121",
+    "google-adsense-account": "ca-pub-2629679506425191",
   },
   // Google AdSense 메타 태그 명시적 추가
   // metadata.other가 자동으로 <meta name="google-adsense-account" content="..."> 생성
@@ -79,7 +79,7 @@ export default function RootLayout({
       <head>
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2248445708639121"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2629679506425191"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
