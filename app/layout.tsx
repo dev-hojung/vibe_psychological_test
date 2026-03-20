@@ -3,7 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://psychology-lab.example";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://vibe-psychological-test.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

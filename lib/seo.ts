@@ -1,7 +1,7 @@
 import { TestDetail } from "./tests";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://psychology-lab.example";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://vibe-psychological-test.vercel.app";
 
 export function generateOrganizationSchema() {
   return {

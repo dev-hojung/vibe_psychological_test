@@ -1,30 +1,35 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 import { tests } from "@/lib/tests";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://psychology-lab.example";
+const siteUrl = "https://vibe-psychological-test.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseDate = new Date();
-
-  // 각 테스트 상세 페이지
-  const testPages = tests.map((test) => ({
-    url: `${siteUrl}/tests/${test.slug}`,
-    lastModified: baseDate,
-    changeFrequency: "weekly" as const,
-    priority: 0.8,
-  }));
+  const testPages = tests.flatMap((test) => [
+    {
+      url: `${siteUrl}/tests/${test.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/tests/${test.slug}/take`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+  ]);
 
   return [
     {
       url: siteUrl,
-      lastModified: baseDate,
-      changeFrequency: "daily" as const,
-      priority: 1.0,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1,
     },
     {
       url: `${siteUrl}/tests`,
-      lastModified: baseDate,
-      changeFrequency: "weekly" as const,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
       priority: 0.9,
     },
     ...testPages,

@@ -1,132 +1,104 @@
-import type { Metadata } from "next";
+import { tests, getTestBySlug } from "@/lib/tests";
+import { assessments } from "@/lib/assessments";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import AssessmentRunner from "@/components/AssessmentRunner";
+import QuizRunnerSwitch from "@/components/QuizRunnerSwitch";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AssessmentRunner } from "@/components/AssessmentRunner";
-import { TravelTrainRunner } from "@/components/TravelTrainRunner";
-import { getAssessmentBySlug } from "@/lib/assessments";
-import { getTestBySlug, tests } from "@/lib/tests";
+import type { Metadata } from "next";
 
-type PageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
+type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
+const QUIZ_SLUGS = [
+  "travel-train",
+  "love-style-test",
+  "color-psychology",
+  "mbti-simple",
+  "communication-style",
+  "money-sense",
+  "conflict-style",
+  "creativity-type",
+];
+
+export async function generateStaticParams() {
   return tests.map((test) => ({ slug: test.slug }));
 }
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://psychology-lab.example";
-
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const test = getTestBySlug(slug);
-  if (!test) {
-    return {
-      title: "테스트를 찾을 수 없습니다",
-    };
-  }
-
-  const url = `${siteUrl}/tests/${slug}/take`;
+  if (!test) return {};
 
   return {
     title: `${test.title} - 테스트 진행`,
-    description: `${test.title}를 시작하세요. ${test.summary}`,
-    robots: {
-      index: false,
-      follow: true,
-    },
-    openGraph: {
-      title: `${test.title} - 테스트 진행`,
-      description: `${test.title}를 시작하세요. ${test.summary}`,
-      url,
-      type: "website",
-    },
-    alternates: {
-      canonical: url,
-    },
+    description: `${test.title}를 지금 시작하세요. ${test.meta.questionCount}문항, 약 ${test.meta.duration} 소요됩니다.`,
   };
 }
 
-export default async function TakeAssessmentPage({ params }: PageProps) {
+export default async function TakePage({ params }: Props) {
   const { slug } = await params;
   const test = getTestBySlug(slug);
+  if (!test) notFound();
 
-  if (!test) {
-    notFound();
-  }
+  const isQuiz = QUIZ_SLUGS.includes(slug);
+  const assessment = !isQuiz
+    ? assessments.find((a) => a.slug === slug)
+    : null;
 
-  // 여행 스타일 테스트는 별도 컴포넌트 사용
-  if (slug === "travel-train") {
-    return (
-      <div className="min-h-screen bg-slate-950/6 dark:bg-slate-950">
-        <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-12 px-6 py-16 sm:px-10 lg:px-12">
-          <header className="space-y-4">
-            <div className="flex flex-wrap items-center gap-2 text-xs text-indigo-600 dark:text-indigo-300">
-              <Link
-                href="/tests"
-                className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 font-medium text-indigo-700 transition hover:bg-white dark:bg-indigo-500/10 dark:text-indigo-100"
-              >
-                전체 보기
-              </Link>
-              <span className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 font-medium text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-100">
-                {test.category}
-              </span>
-              <span className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 font-medium text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-100">
-                {test.meta.duration} · {test.meta.questionCount}문항
-              </span>
-            </div>
-            <h1 className="text-3xl font-semibold text-slate-900 dark:text-slate-100 sm:text-4xl">
-              {test.title} — 테스트 진행
-            </h1>
-            <p className="text-sm text-slate-600 dark:text-slate-300">
-              {test.tagline}
-            </p>
-          </header>
-
-          <TravelTrainRunner />
-        </main>
-      </div>
-    );
-  }
-
-  // 기존 리커트 척도 테스트
-  const assessment = getAssessmentBySlug(slug);
-  if (!assessment) {
-    notFound();
-  }
+  if (!isQuiz && !assessment) notFound();
 
   return (
-    <div className="min-h-screen bg-slate-950/6 dark:bg-slate-950">
-      <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-12 px-6 py-16 sm:px-10 lg:px-12">
-        <header className="space-y-4">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-indigo-600 dark:text-indigo-300">
+    <>
+      <Header />
+      <main className="min-h-screen bg-gray-50">
+        {/* Breadcrumb */}
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 pt-6">
+          <nav className="flex items-center gap-2 text-sm text-gray-500 flex-wrap">
+            <Link href="/" className="hover:text-indigo-600 transition-colors">
+              홈
+            </Link>
+            <span>/</span>
             <Link
               href="/tests"
-              className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 font-medium text-indigo-700 transition hover:bg-white dark:bg-indigo-500/10 dark:text-indigo-100"
+              className="hover:text-indigo-600 transition-colors"
             >
-              전체 보기
+              테스트
             </Link>
-            <span className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 font-medium text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-100">
-              {test.category}
-            </span>
-            <span className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 font-medium text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-100">
-              {test.meta.duration} · {test.meta.questionCount}문항
-            </span>
-          </div>
-          <h1 className="text-3xl font-semibold text-slate-900 dark:text-slate-100 sm:text-4xl">
+            <span>/</span>
+            <Link
+              href={`/tests/${slug}`}
+              className="hover:text-indigo-600 transition-colors truncate max-w-[120px]"
+            >
+              {test.title}
+            </Link>
+            <span>/</span>
+            <span className="text-gray-900 font-medium">진행</span>
+          </nav>
+        </div>
+
+        {/* Title */}
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 pt-4 pb-2">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
             {test.title}
           </h1>
-          <p className="text-sm text-slate-600 dark:text-slate-300">
-            {test.tagline}
-          </p>
-        </header>
+          {!isQuiz && assessment && (
+            <p className="text-sm text-gray-500 mt-1">
+              {assessment.instructions}
+            </p>
+          )}
+        </div>
 
-        <AssessmentRunner assessment={assessment} />
+        {/* Runner */}
+        <section className="mx-auto max-w-2xl px-4 sm:px-6 pb-16">
+          {isQuiz ? (
+            <QuizRunnerSwitch slug={slug} />
+          ) : assessment ? (
+            <AssessmentRunner assessment={assessment} />
+          ) : null}
+        </section>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }

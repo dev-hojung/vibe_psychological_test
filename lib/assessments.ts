@@ -1504,6 +1504,1353 @@ export const assessments: Assessment[] = [
     resultNote:
       "여행 스타일은 상황에 따라 달라질 수 있습니다. 결과를 참고하여 다양한 여행 방식을 시도해보세요.",
   },
+  {
+    slug: "self-esteem-check",
+    title: "자존감 수준 체크 — 3영역 진단",
+    intro:
+      "자기수용, 자기효능감, 사회적 자존감 세 가지 영역을 통해 현재 자존감 수준을 살펴봅니다.",
+    instructions:
+      "최근 2~3주 동안의 평균적인 상태를 떠올리며 솔직하게 응답해 주세요. 정답은 없으며, 자신의 느낌에 가장 가까운 것을 선택하면 됩니다.",
+    scale: defaultScale,
+    questions: [
+      // ACCEPT 축 - 5문항
+      {
+        id: "accept1",
+        prompt: "나의 장점과 단점을 모두 포함해 나 자신을 있는 그대로 받아들인다.",
+        dimension: "ACCEPT",
+      },
+      {
+        id: "accept2",
+        prompt: "실수를 하더라도 스스로를 지나치게 비난하지 않는 편이다.",
+        dimension: "ACCEPT",
+      },
+      {
+        id: "accept3",
+        prompt: "다른 사람과 비교하기보다 나만의 속도를 존중한다.",
+        dimension: "ACCEPT",
+      },
+      {
+        id: "accept4",
+        prompt: "완벽하지 않아도 괜찮다고 느낀다.",
+        dimension: "ACCEPT",
+      },
+      {
+        id: "accept5",
+        prompt: "거울을 볼 때 외모에 대해 대체로 편안한 마음이 든다.",
+        dimension: "ACCEPT",
+      },
+      // EFFICACY 축 - 5문항
+      {
+        id: "efficacy1",
+        prompt: "새로운 과제가 주어지면 '해낼 수 있다'는 생각이 먼저 든다.",
+        dimension: "EFFICACY",
+      },
+      {
+        id: "efficacy2",
+        prompt: "어려운 상황에서도 해결 방법을 찾을 수 있다고 믿는다.",
+        dimension: "EFFICACY",
+      },
+      {
+        id: "efficacy3",
+        prompt: "목표를 세우면 끝까지 해내는 편이다.",
+        dimension: "EFFICACY",
+      },
+      {
+        id: "efficacy4",
+        prompt: "실패한 경험이 있어도 다시 도전할 의지가 생긴다.",
+        dimension: "EFFICACY",
+      },
+      {
+        id: "efficacy5",
+        prompt: "내가 노력하면 결과가 달라질 수 있다고 생각한다.",
+        dimension: "EFFICACY",
+      },
+      // SOCIAL 축 - 5문항
+      {
+        id: "social1",
+        prompt: "모임이나 단체에서 나의 의견이 존중받는다고 느낀다.",
+        dimension: "SOCIAL",
+      },
+      {
+        id: "social2",
+        prompt: "새로운 사람을 만나는 상황에서 크게 위축되지 않는다.",
+        dimension: "SOCIAL",
+      },
+      {
+        id: "social3",
+        prompt: "친구나 동료 사이에서 나는 충분히 가치 있는 존재라고 느낀다.",
+        dimension: "SOCIAL",
+      },
+      {
+        id: "social4",
+        prompt: "다른 사람의 평가에 크게 흔들리지 않는 편이다.",
+        dimension: "SOCIAL",
+      },
+      {
+        id: "social5",
+        prompt: "갈등 상황에서도 나의 입장을 적절히 표현할 수 있다.",
+        dimension: "SOCIAL",
+      },
+    ],
+    dimensions: [
+      {
+        id: "ACCEPT",
+        label: "자기수용",
+        description: "자신의 모습을 있는 그대로 받아들이는 정도",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "자신에 대한 수용도가 낮은 편입니다. 자기 비판적 사고가 강할 수 있으며, 작은 실수에도 자책하는 경향이 있습니다. '나도 괜찮다'는 자기 확인 연습부터 시작해 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "상황에 따라 자기수용 수준이 변동합니다. 대체로 자신을 받아들이지만, 특정 상황에서 자기 비판이 강해질 수 있습니다. 자기 긍정 일기를 통해 일관성을 높여 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "자신을 있는 그대로 잘 받아들이고 있습니다. 단점도 성장의 일부로 여기는 건강한 태도를 가지고 있습니다. 이 태도를 유지하며 주변 사람에게도 공유해 보세요.",
+          },
+        ],
+      },
+      {
+        id: "EFFICACY",
+        label: "자기효능감",
+        description: "도전과 과제를 해낼 수 있다는 믿음",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "새로운 도전에 대한 자신감이 부족한 상태입니다. 작은 성공 경험을 의도적으로 쌓아가며, 할 수 있는 일의 범위를 조금씩 넓혀 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "익숙한 영역에서는 자신감이 있지만, 새로운 상황에서 주저할 수 있습니다. 도전 일지를 작성하며 성취 경험을 기록해 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "자기효능감이 높아 새로운 도전에도 적극적으로 임합니다. 이 에너지를 활용하여 더 큰 목표에 도전해 보세요.",
+          },
+        ],
+      },
+      {
+        id: "SOCIAL",
+        label: "사회적 자존감",
+        description: "타인과의 관계에서 느끼는 자신의 가치",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "대인관계에서 자신의 가치를 낮게 평가하는 경향이 있습니다. 타인의 시선에 지나치게 민감할 수 있으므로, 신뢰할 수 있는 사람과의 소통을 늘려 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "관계 속에서 대체로 편안하지만, 특정 상황에서 위축될 수 있습니다. 자기 표현 연습을 통해 관계 속 자신감을 키워 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "관계에서 자신의 가치를 잘 인식하고 있습니다. 타인의 평가에 크게 흔들리지 않으며, 건강한 경계를 유지합니다.",
+          },
+        ],
+      },
+    ],
+    resultNote:
+      "자존감은 고정된 것이 아니라 경험과 노력으로 변화할 수 있습니다. 낮은 영역이 있다면 작은 실천부터 시작해 보세요. 지속적인 어려움이 있다면 전문 상담을 권장합니다.",
+  },
+  {
+    slug: "eq-test",
+    title: "감정 지능(EQ) 테스트 — 4영역 진단",
+    intro:
+      "자기인식, 자기조절, 공감능력, 관계관리 네 가지 영역을 통해 감정 지능 수준을 진단합니다.",
+    instructions:
+      "평소 자신의 행동과 감정 패턴을 떠올리며 솔직하게 응답해 주세요. 이상적인 모습이 아닌, 실제 자신의 모습에 가깝게 선택하면 됩니다.",
+    scale: defaultScale,
+    questions: [
+      // AWARE 축 - 5문항
+      {
+        id: "aware1",
+        prompt: "나는 지금 어떤 감정을 느끼고 있는지 대부분 인지하고 있다.",
+        dimension: "AWARE",
+      },
+      {
+        id: "aware2",
+        prompt: "감정이 격해질 때 그 원인이 무엇인지 파악할 수 있다.",
+        dimension: "AWARE",
+      },
+      {
+        id: "aware3",
+        prompt: "기분이 좋거나 나쁠 때 신체 반응(가슴 두근거림, 어깨 긴장 등)을 알아차린다.",
+        dimension: "AWARE",
+      },
+      {
+        id: "aware4",
+        prompt: "나의 감정이 의사결정에 미치는 영향을 이해하고 있다.",
+        dimension: "AWARE",
+      },
+      {
+        id: "aware5",
+        prompt: "복잡한 감정(기쁨과 불안이 동시에 느껴지는 등)도 구분하여 인식할 수 있다.",
+        dimension: "AWARE",
+      },
+      // REGULATE 축 - 5문항
+      {
+        id: "regulate1",
+        prompt: "화가 나는 상황에서도 충동적으로 행동하지 않고 잠시 멈출 수 있다.",
+        dimension: "REGULATE",
+      },
+      {
+        id: "regulate2",
+        prompt: "스트레스를 받으면 나만의 방법으로 감정을 가라앉힐 수 있다.",
+        dimension: "REGULATE",
+      },
+      {
+        id: "regulate3",
+        prompt: "실망스러운 일이 생겨도 비교적 빠르게 평정심을 되찾는 편이다.",
+        dimension: "REGULATE",
+      },
+      {
+        id: "regulate4",
+        prompt: "부정적인 감정에 오래 빠져있지 않고 전환할 수 있다.",
+        dimension: "REGULATE",
+      },
+      {
+        id: "regulate5",
+        prompt: "감정적으로 힘든 상황에서도 해야 할 일에 집중할 수 있다.",
+        dimension: "REGULATE",
+      },
+      // EMPATHY 축 - 5문항
+      {
+        id: "empathy1",
+        prompt: "상대방의 표정이나 어조만으로도 감정 상태를 잘 파악한다.",
+        dimension: "EMPATHY",
+      },
+      {
+        id: "empathy2",
+        prompt: "다른 사람이 힘들어할 때 그 마음을 진심으로 이해하려고 노력한다.",
+        dimension: "EMPATHY",
+      },
+      {
+        id: "empathy3",
+        prompt: "나와 다른 입장이나 관점을 가진 사람의 감정도 존중할 수 있다.",
+        dimension: "EMPATHY",
+      },
+      {
+        id: "empathy4",
+        prompt: "대화할 때 상대방이 진짜로 하고 싶은 말이 무엇인지 잘 캐치한다.",
+        dimension: "EMPATHY",
+      },
+      {
+        id: "empathy5",
+        prompt: "누군가 슬퍼하거나 기뻐하면 나도 비슷한 감정을 느끼는 편이다.",
+        dimension: "EMPATHY",
+      },
+      // RELATE 축 - 5문항
+      {
+        id: "relate1",
+        prompt: "갈등이 생겼을 때 상대방과 대화로 풀어가려 노력한다.",
+        dimension: "RELATE",
+      },
+      {
+        id: "relate2",
+        prompt: "팀이나 그룹에서 분위기가 어색해지면 자연스럽게 분위기를 풀 수 있다.",
+        dimension: "RELATE",
+      },
+      {
+        id: "relate3",
+        prompt: "상대방에게 비판적 피드백을 줄 때도 감정을 배려하며 전달한다.",
+        dimension: "RELATE",
+      },
+      {
+        id: "relate4",
+        prompt: "오래된 관계를 꾸준히 잘 유지하는 편이다.",
+        dimension: "RELATE",
+      },
+      {
+        id: "relate5",
+        prompt: "처음 만난 사람과도 비교적 빨리 편안한 관계를 만들 수 있다.",
+        dimension: "RELATE",
+      },
+    ],
+    dimensions: [
+      {
+        id: "AWARE",
+        label: "자기인식",
+        description: "자신의 감정 상태를 인지하는 능력",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "자신의 감정을 인식하는 것이 어려운 상태입니다. 감정 일기를 시작하거나, 하루에 3번 '지금 내 기분은?' 체크를 해보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "기본적인 감정 인식은 가능하지만, 복잡한 감정 상황에서 혼란을 느낄 수 있습니다. 감정 어휘를 늘리면 인식 능력이 향상됩니다.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "자신의 감정을 섬세하게 인식하고 있습니다. 이 능력을 활용하여 감정의 원인을 분석하고 더 나은 의사결정에 연결해 보세요.",
+          },
+        ],
+      },
+      {
+        id: "REGULATE",
+        label: "자기조절",
+        description: "감정을 적절히 조절하는 능력",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "감정 조절에 어려움을 겪고 있습니다. 심호흡, 6초 멈추기 등 즉각적인 조절 기법부터 연습해 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "일상적인 상황에서는 감정 조절이 가능하지만, 강한 스트레스 상황에서 어려움을 느낄 수 있습니다. 스트레스 대처 전략을 다양화해 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "감정 조절 능력이 뛰어납니다. 어려운 상황에서도 침착하게 대처할 수 있으며, 이 능력은 리더십에도 큰 강점이 됩니다.",
+          },
+        ],
+      },
+      {
+        id: "EMPATHY",
+        label: "공감능력",
+        description: "타인의 감정을 이해하는 능력",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "타인의 감정을 파악하는 것이 어려운 편입니다. 대화할 때 상대방의 표정과 어조에 의식적으로 주의를 기울여 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "가까운 사람의 감정은 잘 파악하지만, 낯선 사람이나 미묘한 감정 변화에는 둔감할 수 있습니다. 적극적 경청 연습이 도움이 됩니다.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "타인의 감정을 깊이 이해하고 공감하는 능력이 뛰어납니다. 다만, 타인의 감정에 지나치게 몰입하지 않도록 건강한 경계도 유지하세요.",
+          },
+        ],
+      },
+      {
+        id: "RELATE",
+        label: "관계관리",
+        description: "관계를 효과적으로 유지하는 능력",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "대인관계 유지와 갈등 해결에 어려움을 느끼고 있습니다. 작은 관심 표현(안부 메시지, 감사 표현)부터 시작해 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "기본적인 관계 유지는 잘 하지만, 갈등 상황이나 새로운 관계 형성에서 어려움을 느낄 수 있습니다. 비폭력대화(NVC) 방식을 참고해 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "관계를 잘 형성하고 유지하며, 갈등 상황에서도 건설적으로 소통합니다. 이 능력을 활용하여 주변 사람들의 관계 개선도 도울 수 있습니다.",
+          },
+        ],
+      },
+    ],
+    resultNote:
+      "감정 지능은 타고나는 것이 아니라 연습과 경험을 통해 꾸준히 발전시킬 수 있는 역량입니다. 낮은 영역부터 하나씩 개선해 나가 보세요.",
+  },
+  {
+    slug: "burnout-check",
+    title: "번아웃 지수 체크 — 3영역 진단",
+    intro:
+      "정서적 소진, 냉소화, 효능감 저하 세 가지 영역을 통해 번아웃 수준을 점검합니다. 최근 한 달간의 상태를 기준으로 응답해 주세요.",
+    instructions:
+      "최근 한 달 동안의 업무·일상 경험을 떠올리며 솔직하게 응답해 주세요. 이상적인 모습이 아닌 실제 느낌에 가깝게 선택하면 됩니다.",
+    scale: defaultScale,
+    questions: [
+      // EXHAUST 축 - 5문항
+      {
+        id: "exhaust1",
+        prompt: "퇴근 후에도 감정적으로 완전히 지쳐있는 느낌이 듭니다.",
+        dimension: "EXHAUST",
+      },
+      {
+        id: "exhaust2",
+        prompt: "아침에 일어나면 벌써 하루가 버겁게 느껴집니다.",
+        dimension: "EXHAUST",
+      },
+      {
+        id: "exhaust3",
+        prompt: "사람들과 대화하는 것 자체가 에너지를 많이 소모하는 일처럼 느껴집니다.",
+        dimension: "EXHAUST",
+      },
+      {
+        id: "exhaust4",
+        prompt: "주말에 충분히 쉬어도 월요일이 되면 다시 탈진한 기분이 듭니다.",
+        dimension: "EXHAUST",
+        helper: "회복이 잘 되지 않는 느낌에 초점을 맞춰 주세요.",
+      },
+      {
+        id: "exhaust5",
+        prompt: "감정적으로 줄 수 있는 것이 더 이상 남아있지 않다고 느낍니다.",
+        dimension: "EXHAUST",
+      },
+      // CYNICAL 축 - 5문항
+      {
+        id: "cynical1",
+        prompt: "업무에 대한 열정이나 의미를 찾기 어렵습니다.",
+        dimension: "CYNICAL",
+      },
+      {
+        id: "cynical2",
+        prompt: "동료나 고객의 이야기에 예전만큼 관심이 가지 않습니다.",
+        dimension: "CYNICAL",
+      },
+      {
+        id: "cynical3",
+        prompt: "일을 그저 기계적으로 처리하고 있다는 생각이 듭니다.",
+        dimension: "CYNICAL",
+      },
+      {
+        id: "cynical4",
+        prompt: "직장이나 조직에 대해 냉소적인 생각이 자주 듭니다.",
+        dimension: "CYNICAL",
+      },
+      {
+        id: "cynical5",
+        prompt: "내가 하는 일이 정말 의미가 있는지 회의감이 듭니다.",
+        dimension: "CYNICAL",
+        helper: "일의 가치에 대한 의문에 초점을 맞춰 주세요.",
+      },
+      // EFFICACY 축 - 5문항 (reverse scored)
+      {
+        id: "bo_efficacy1",
+        prompt: "업무에서 어려운 문제가 생겨도 해결할 수 있다는 자신감이 있습니다.",
+        dimension: "EFFICACY",
+        reverse: true,
+      },
+      {
+        id: "bo_efficacy2",
+        prompt: "내가 맡은 일에서 의미 있는 성과를 내고 있다고 느낍니다.",
+        dimension: "EFFICACY",
+        reverse: true,
+      },
+      {
+        id: "bo_efficacy3",
+        prompt: "동료나 팀에 긍정적인 영향을 주고 있다고 생각합니다.",
+        dimension: "EFFICACY",
+        reverse: true,
+      },
+      {
+        id: "bo_efficacy4",
+        prompt: "최근 한 달간 스스로 성장하고 있다는 느낌이 듭니다.",
+        dimension: "EFFICACY",
+        reverse: true,
+        helper: "업무 역량이나 개인적 성장 모두 포함합니다.",
+      },
+      {
+        id: "bo_efficacy5",
+        prompt: "나의 업무 능력에 대해 전반적으로 만족합니다.",
+        dimension: "EFFICACY",
+        reverse: true,
+      },
+    ],
+    dimensions: [
+      {
+        id: "EXHAUST",
+        label: "정서적 소진",
+        description: "감정적 에너지 고갈 정도",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음(양호)",
+            description:
+              "감정적 에너지가 비교적 잘 유지되고 있습니다. 현재의 회복 루틴을 꾸준히 유지해 주세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통(주의)",
+            description:
+              "감정적 피로가 쌓이고 있습니다. 의도적인 쉼과 감정 환기 시간을 확보해 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음(위험)",
+            description:
+              "정서적 에너지가 심각하게 고갈된 상태입니다. 업무량 조정과 전문 상담을 적극 권장합니다.",
+          },
+        ],
+      },
+      {
+        id: "CYNICAL",
+        label: "냉소화",
+        description: "업무나 관계에 대한 무관심/부정적 태도",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음(양호)",
+            description:
+              "업무와 관계에 대한 관심과 의미감이 유지되고 있습니다. 좋은 상태입니다.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통(주의)",
+            description:
+              "업무나 관계에 대한 거리감이 생기고 있습니다. 일의 의미를 재확인하고 동료와 소통을 늘려 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음(위험)",
+            description:
+              "냉소적 태도가 강하게 나타납니다. 이는 번아웃의 핵심 신호이므로 환경 변화나 전문 지원을 고려해 주세요.",
+          },
+        ],
+      },
+      {
+        id: "EFFICACY",
+        label: "효능감 저하",
+        description: "성취감과 자기효능감 감소 (역채점)",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "높음(위험)",
+            description:
+              "자기효능감이 크게 저하된 상태입니다. 작은 성공 경험을 의도적으로 만들고, 성과를 기록하는 습관을 시작해 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통(주의)",
+            description:
+              "효능감이 불안정한 상태입니다. 자신의 기여와 성과를 정기적으로 돌아보는 시간을 가져 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "낮음(양호)",
+            description:
+              "업무에서의 성취감과 자기효능감이 잘 유지되고 있습니다. 이 긍정적 에너지를 활용해 주세요.",
+          },
+        ],
+      },
+    ],
+    resultNote:
+      "번아웃은 누적되는 과정입니다. '보통' 이상인 영역이 있다면 일상에서 의도적인 회복 루틴을 만들어보세요.",
+  },
+  {
+    slug: "self-efficacy-test",
+    title: "자기효능감 테스트 — 3영역 진단",
+    intro:
+      "일반적, 사회적, 과제 수행 세 가지 영역에서 자기효능감 수준을 파악합니다. 자신의 능력에 대한 믿음을 점검해 보세요.",
+    instructions:
+      "평소 자신의 행동과 생각을 떠올리며 솔직하게 응답해 주세요. 잘하고 싶은 모습이 아닌, 실제 느끼는 정도에 가깝게 선택하면 됩니다.",
+    scale: defaultScale,
+    questions: [
+      // GENERAL 축 - 5문항
+      {
+        id: "general1",
+        prompt: "예상치 못한 상황이 닥쳐도 적절히 대처할 수 있다고 생각합니다.",
+        dimension: "GENERAL",
+      },
+      {
+        id: "general2",
+        prompt: "어려운 문제에 부딪혀도 여러 가지 해결책을 찾아낼 수 있습니다.",
+        dimension: "GENERAL",
+      },
+      {
+        id: "general3",
+        prompt: "새로운 도전이 주어지면 두렵기보다 해볼 만하다고 느낍니다.",
+        dimension: "GENERAL",
+        helper: "최근 경험을 떠올려 주세요.",
+      },
+      {
+        id: "general4",
+        prompt: "실패를 경험해도 다시 시도할 수 있는 힘이 있다고 느낍니다.",
+        dimension: "GENERAL",
+      },
+      {
+        id: "general5",
+        prompt: "대부분의 상황에서 나는 잘 해낼 수 있다고 믿습니다.",
+        dimension: "GENERAL",
+      },
+      // SOCIAL 축 - 5문항
+      {
+        id: "se_social1",
+        prompt: "낯선 사람과도 자연스럽게 대화를 시작할 수 있습니다.",
+        dimension: "SOCIAL",
+      },
+      {
+        id: "se_social2",
+        prompt: "모임이나 회의에서 내 의견을 자신 있게 말할 수 있습니다.",
+        dimension: "SOCIAL",
+      },
+      {
+        id: "se_social3",
+        prompt: "갈등 상황에서도 상대방과 원만하게 소통할 수 있다고 생각합니다.",
+        dimension: "SOCIAL",
+      },
+      {
+        id: "se_social4",
+        prompt: "도움이 필요할 때 주변 사람에게 편하게 요청할 수 있습니다.",
+        dimension: "SOCIAL",
+        helper: "실제로 도움을 요청했던 경험을 떠올려 보세요.",
+      },
+      {
+        id: "se_social5",
+        prompt: "새로운 집단에서도 비교적 빨리 적응하고 관계를 맺을 수 있습니다.",
+        dimension: "SOCIAL",
+      },
+      // TASK 축 - 5문항
+      {
+        id: "task1",
+        prompt: "복잡한 과제도 단계적으로 나누면 해낼 수 있다고 생각합니다.",
+        dimension: "TASK",
+      },
+      {
+        id: "task2",
+        prompt: "마감 기한이 촉박해도 필요한 결과물을 완성할 수 있습니다.",
+        dimension: "TASK",
+      },
+      {
+        id: "task3",
+        prompt: "새로운 기술이나 도구를 배워야 할 때 잘 해낼 수 있다고 느낍니다.",
+        dimension: "TASK",
+      },
+      {
+        id: "task4",
+        prompt: "동시에 여러 과제를 처리해야 할 때도 잘 관리할 수 있습니다.",
+        dimension: "TASK",
+        helper: "멀티태스킹 상황을 떠올려 보세요.",
+      },
+      {
+        id: "task5",
+        prompt: "내가 잘 모르는 분야의 과제라도 학습하면 해결할 수 있다고 믿습니다.",
+        dimension: "TASK",
+      },
+    ],
+    dimensions: [
+      {
+        id: "GENERAL",
+        label: "일반적 자기효능감",
+        description: "전반적인 도전 대처 능력 믿음",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "전반적인 자신감이 부족한 상태입니다. 작은 목표부터 달성해 가며 성공 경험을 쌓아 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "상황에 따라 자신감이 달라집니다. 성공 경험을 기록하고 정기적으로 돌아보는 습관이 도움이 됩니다.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "도전에 대한 자신감이 높습니다. 이 에너지를 활용해 더 큰 목표에 도전해 보세요.",
+          },
+        ],
+      },
+      {
+        id: "SOCIAL",
+        label: "사회적 자기효능감",
+        description: "대인관계에서의 자신감",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "대인관계에서 자신감이 부족합니다. 소규모 모임부터 참여하며 사회적 경험을 넓혀 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "친숙한 관계에서는 편안하지만 새로운 환경에서 위축될 수 있습니다. 의도적인 소통 연습이 도움이 됩니다.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "사회적 상황에서 자신감이 높습니다. 이 강점을 활용해 리더십이나 멘토링 역할도 시도해 보세요.",
+          },
+        ],
+      },
+      {
+        id: "TASK",
+        label: "과제 자기효능감",
+        description: "구체적 과제 수행 능력에 대한 믿음",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "과제 수행에 대한 자신감이 낮습니다. 과제를 작은 단위로 나누고 하나씩 완료하는 연습을 해 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "익숙한 과제는 잘 수행하지만 새로운 과제에서 불안감을 느낄 수 있습니다. 학습 계획을 세우면 도움이 됩니다.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "과제 수행에 대한 자신감이 높습니다. 더 복잡하고 도전적인 과제에도 적극적으로 임해 보세요.",
+          },
+        ],
+      },
+    ],
+    resultNote:
+      "자기효능감은 경험을 통해 강화됩니다. 작은 성공 경험을 의도적으로 쌓아가는 것이 핵심입니다.",
+  },
+  {
+    slug: "focus-pattern-check",
+    title: "집중력 패턴 진단 — 3영역 분석",
+    intro:
+      "지속적, 선택적, 전환적 집중력 세 가지 패턴을 통해 나의 집중 특성을 파악합니다.",
+    instructions:
+      "최근 2주간의 일상과 업무 경험을 떠올리며 응답해 주세요. 특별한 상황이 아닌 평소 패턴에 맞게 선택하면 됩니다.",
+    scale: defaultScale,
+    questions: [
+      // SUSTAIN 축 - 5문항
+      {
+        id: "sustain1",
+        prompt: "한 가지 일에 30분 이상 몰입할 수 있습니다.",
+        dimension: "SUSTAIN",
+      },
+      {
+        id: "sustain2",
+        prompt: "긴 글이나 보고서를 끝까지 집중해서 읽을 수 있습니다.",
+        dimension: "SUSTAIN",
+      },
+      {
+        id: "sustain3",
+        prompt: "반복적인 작업도 꾸준히 집중력을 유지할 수 있습니다.",
+        dimension: "SUSTAIN",
+        helper: "단순 반복 업무 경험을 떠올려 보세요.",
+      },
+      {
+        id: "sustain4",
+        prompt: "시간이 지나도 작업의 정확도가 크게 떨어지지 않습니다.",
+        dimension: "SUSTAIN",
+      },
+      {
+        id: "sustain5",
+        prompt: "집중이 필요한 일을 할 때 시간 가는 줄 모를 때가 많습니다.",
+        dimension: "SUSTAIN",
+      },
+      // SELECT 축 - 5문항
+      {
+        id: "select1",
+        prompt: "주변이 시끄러워도 해야 할 일에 집중할 수 있습니다.",
+        dimension: "SELECT",
+      },
+      {
+        id: "select2",
+        prompt: "스마트폰 알림이 와도 하던 일을 계속 이어갈 수 있습니다.",
+        dimension: "SELECT",
+      },
+      {
+        id: "select3",
+        prompt: "여러 가지 생각이 떠올라도 지금 할 일에 다시 집중할 수 있습니다.",
+        dimension: "SELECT",
+      },
+      {
+        id: "select4",
+        prompt: "옆에서 대화가 들려도 내 작업에 방해받지 않는 편입니다.",
+        dimension: "SELECT",
+        helper: "사무실이나 카페 등의 환경을 떠올려 보세요.",
+      },
+      {
+        id: "select5",
+        prompt: "중요한 정보와 덜 중요한 정보를 빠르게 구분할 수 있습니다.",
+        dimension: "SELECT",
+      },
+      // SWITCH 축 - 5문항
+      {
+        id: "switch1",
+        prompt: "하나의 과제에서 다른 과제로 빠르게 전환할 수 있습니다.",
+        dimension: "SWITCH",
+      },
+      {
+        id: "switch2",
+        prompt: "예상치 못한 요청이 들어와도 유연하게 대응할 수 있습니다.",
+        dimension: "SWITCH",
+      },
+      {
+        id: "switch3",
+        prompt: "회의 후 바로 개인 업무에 집중하는 데 어려움이 없습니다.",
+        dimension: "SWITCH",
+      },
+      {
+        id: "switch4",
+        prompt: "서로 다른 성격의 업무를 번갈아 해도 효율이 크게 떨어지지 않습니다.",
+        dimension: "SWITCH",
+        helper: "예를 들어 기획과 분석을 번갈아 하는 상황입니다.",
+      },
+      {
+        id: "switch5",
+        prompt: "중단된 일을 다시 시작할 때 빠르게 맥락을 되찾을 수 있습니다.",
+        dimension: "SWITCH",
+      },
+    ],
+    dimensions: [
+      {
+        id: "SUSTAIN",
+        label: "지속적 집중",
+        description: "한 가지에 오래 집중하는 능력",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "장시간 집중이 어렵습니다. Pomodoro 기법(25분 집중 + 5분 휴식)부터 시작해 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "기본적인 집중은 가능하지만 지속시간이 불안정합니다. 집중 환경을 최적화하면 개선될 수 있습니다.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "장시간 몰입이 가능합니다. 이 강점을 살려 깊은 사고가 필요한 업무에 활용해 보세요.",
+          },
+        ],
+      },
+      {
+        id: "SELECT",
+        label: "선택적 집중",
+        description: "방해 요소를 걸러내는 능력",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "외부 방해에 쉽게 영향을 받습니다. 알림 차단, 조용한 공간 확보 등 환경 통제부터 시작해 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "어느 정도 방해를 걸러낼 수 있지만 강한 자극에는 흔들립니다. 집중 모드를 활용해 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "방해 요소를 잘 걸러내고 필요한 것에 선택적으로 집중합니다. 복잡한 환경에서도 성과를 낼 수 있습니다.",
+          },
+        ],
+      },
+      {
+        id: "SWITCH",
+        label: "전환적 집중",
+        description: "과제 간 유연하게 전환하는 능력",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "과제 전환 시 많은 에너지가 소모됩니다. 유사한 업무를 묶어서 처리하는 배칭(batching) 전략을 써 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "기본적인 전환은 가능하지만 복잡한 전환에서 효율이 떨어집니다. 전환 시 짧은 리셋 시간을 두면 도움이 됩니다.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "과제 간 유연한 전환이 가능합니다. 다양한 업무를 동시에 관리해야 하는 역할에 적합합니다.",
+          },
+        ],
+      },
+    ],
+    resultNote:
+      "집중력은 근육과 같아 훈련할 수 있습니다. 자신의 집중 패턴을 이해하고 맞춤 전략을 세워보세요.",
+  },
+  {
+    slug: "sleep-health-check",
+    title: "수면 건강 체크 — 3영역 진단",
+    intro:
+      "수면의 질, 수면 습관, 일상 영향 세 가지 영역을 통해 수면 건강 상태를 점검합니다.",
+    instructions:
+      "최근 2주간의 수면 경험을 떠올리며 응답해 주세요. 특별히 좋거나 나빴던 날이 아닌, 평균적인 상태를 기준으로 선택해 주세요.",
+    scale: defaultScale,
+    questions: [
+      // QUALITY 축 - 4문항
+      {
+        id: "quality1",
+        prompt: "잠에서 깨면 개운하고 충분히 잤다는 느낌이 듭니다.",
+        dimension: "QUALITY",
+      },
+      {
+        id: "quality2",
+        prompt: "잠들면 중간에 깨지 않고 아침까지 숙면합니다.",
+        dimension: "QUALITY",
+      },
+      {
+        id: "quality3",
+        prompt: "꿈을 거의 꾸지 않거나, 꿔도 수면에 방해가 되지 않습니다.",
+        dimension: "QUALITY",
+        helper: "악몽이나 생생한 꿈으로 수면이 방해되는 경험을 떠올려 보세요.",
+      },
+      {
+        id: "quality4",
+        prompt: "잠자리에 누우면 20분 이내에 잠이 드는 편입니다.",
+        dimension: "QUALITY",
+      },
+      // HABIT 축 - 4문항
+      {
+        id: "habit1",
+        prompt: "매일 비슷한 시간에 잠들고 비슷한 시간에 일어납니다.",
+        dimension: "HABIT",
+      },
+      {
+        id: "habit2",
+        prompt: "잠들기 전 1시간 이내에는 스마트폰이나 PC 사용을 줄입니다.",
+        dimension: "HABIT",
+      },
+      {
+        id: "habit3",
+        prompt: "카페인 섭취를 오후 이전으로 제한하고 있습니다.",
+        dimension: "HABIT",
+      },
+      {
+        id: "habit4",
+        prompt: "수면 환경(온도, 조명, 소음)을 쾌적하게 유지하려고 노력합니다.",
+        dimension: "HABIT",
+        helper: "침실 환경 관리에 초점을 맞춰 주세요.",
+      },
+      // IMPACT 축 - 4문항 (reverse scored - 높을수록 나쁨)
+      {
+        id: "impact1",
+        prompt: "낮 동안 졸음 때문에 업무나 활동에 지장을 받습니다.",
+        dimension: "IMPACT",
+        reverse: true,
+      },
+      {
+        id: "impact2",
+        prompt: "수면 부족으로 집중력이 떨어지는 경우가 자주 있습니다.",
+        dimension: "IMPACT",
+        reverse: true,
+      },
+      {
+        id: "impact3",
+        prompt: "피로감 때문에 계획했던 활동을 포기한 적이 있습니다.",
+        dimension: "IMPACT",
+        reverse: true,
+      },
+      {
+        id: "impact4",
+        prompt: "수면 상태가 기분이나 감정에 부정적인 영향을 미칩니다.",
+        dimension: "IMPACT",
+        reverse: true,
+        helper: "수면이 좋지 않은 날의 감정 변화를 떠올려 보세요.",
+      },
+    ],
+    dimensions: [
+      {
+        id: "QUALITY",
+        label: "수면 질",
+        description: "수면의 깊이와 개운함",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "수면의 질이 낮은 상태입니다. 수면 환경 개선과 취침 전 루틴을 점검해 보세요. 지속되면 전문 상담을 권장합니다.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "수면의 질이 일정하지 않습니다. 규칙적인 수면 스케줄과 이완 기법을 도입해 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "수면의 질이 양호합니다. 현재 수면 패턴을 잘 유지하고 계세요.",
+          },
+        ],
+      },
+      {
+        id: "HABIT",
+        label: "수면 습관",
+        description: "규칙적인 수면 패턴 유지",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "수면 습관이 불규칙합니다. 일정한 취침/기상 시간부터 설정하고, 수면 위생 원칙을 하나씩 적용해 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "기본적인 수면 습관은 있으나 개선의 여지가 있습니다. 취침 전 루틴을 정립해 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "건강한 수면 습관을 잘 유지하고 있습니다. 이 루틴을 꾸준히 이어가세요.",
+          },
+        ],
+      },
+      {
+        id: "IMPACT",
+        label: "일상 영향",
+        description: "수면이 낮 활동에 미치는 영향 (역채점)",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음(양호)",
+            description:
+              "수면이 일상에 부정적 영향을 거의 주지 않고 있습니다. 현재 상태를 잘 유지하세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통(주의)",
+            description:
+              "수면 문제가 일상에 간헐적으로 영향을 주고 있습니다. 수면 질과 습관 개선을 병행해 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음(개선필요)",
+            description:
+              "수면 문제가 일상 기능에 상당한 영향을 미치고 있습니다. 수면 전문 클리닉 방문을 고려해 보세요.",
+          },
+        ],
+      },
+    ],
+    resultNote:
+      "수면은 심신 건강의 기초입니다. 수면 질이 낮거나 일상 영향이 크다면 수면 위생 개선을 시작해보세요.",
+  },
+  {
+    slug: "happiness-index",
+    title: "행복 지수 측정 — 4영역 진단",
+    intro:
+      "삶의 만족, 긍정 정서, 삶의 의미, 관계 만족 네 가지 영역을 통해 행복 수준을 종합적으로 살펴봅니다.",
+    instructions:
+      "최근 한 달간의 전반적인 기분과 경험을 떠올리며 응답해 주세요. 특별한 사건이 아닌 평소 느끼는 정도에 가깝게 선택하면 됩니다.",
+    scale: defaultScale,
+    questions: [
+      // LIFE 축 - 5문항
+      {
+        id: "life1",
+        prompt: "전반적으로 나의 삶에 만족합니다.",
+        dimension: "LIFE",
+      },
+      {
+        id: "life2",
+        prompt: "지금까지의 삶에서 원했던 중요한 것들을 이루었다고 생각합니다.",
+        dimension: "LIFE",
+      },
+      {
+        id: "life3",
+        prompt: "다시 살더라도 현재와 비슷한 삶을 선택할 것입니다.",
+        dimension: "LIFE",
+        helper: "삶의 전반적인 방향에 대한 만족도를 떠올려 주세요.",
+      },
+      {
+        id: "life4",
+        prompt: "나의 생활 여건은 좋은 편이라고 생각합니다.",
+        dimension: "LIFE",
+      },
+      {
+        id: "life5",
+        prompt: "현재 내 삶은 이상적인 모습에 가깝습니다.",
+        dimension: "LIFE",
+      },
+      // EMOTION 축 - 5문항
+      {
+        id: "hp_emotion1",
+        prompt: "일상에서 즐거움이나 기쁨을 자주 느낍니다.",
+        dimension: "EMOTION",
+      },
+      {
+        id: "hp_emotion2",
+        prompt: "유머를 즐기고 자주 웃는 편입니다.",
+        dimension: "EMOTION",
+      },
+      {
+        id: "hp_emotion3",
+        prompt: "작은 일에서도 감사함을 느끼는 편입니다.",
+        dimension: "EMOTION",
+      },
+      {
+        id: "hp_emotion4",
+        prompt: "하루를 마무리할 때 긍정적인 기분인 날이 많습니다.",
+        dimension: "EMOTION",
+        helper: "일주일 중 긍정적인 기분으로 하루를 마감하는 날이 얼마나 되는지 생각해 보세요.",
+      },
+      {
+        id: "hp_emotion5",
+        prompt: "미래에 대해 희망적이고 기대되는 마음이 있습니다.",
+        dimension: "EMOTION",
+      },
+      // MEANING 축 - 4문항
+      {
+        id: "meaning1",
+        prompt: "내 삶에는 분명한 목적이나 방향이 있다고 느낍니다.",
+        dimension: "MEANING",
+      },
+      {
+        id: "meaning2",
+        prompt: "내가 하는 일이나 활동이 의미 있다고 생각합니다.",
+        dimension: "MEANING",
+      },
+      {
+        id: "meaning3",
+        prompt: "나의 존재가 주변에 긍정적인 영향을 준다고 느낍니다.",
+        dimension: "MEANING",
+      },
+      {
+        id: "meaning4",
+        prompt: "삶에서 무엇이 중요한지 나만의 기준이 있습니다.",
+        dimension: "MEANING",
+        helper: "가치관이나 인생 철학에 대해 생각해 보세요.",
+      },
+      // RELATION 축 - 4문항
+      {
+        id: "relation1",
+        prompt: "가까운 사람들과의 관계에서 행복감을 느낍니다.",
+        dimension: "RELATION",
+      },
+      {
+        id: "relation2",
+        prompt: "힘들 때 기댈 수 있는 사람이 있습니다.",
+        dimension: "RELATION",
+      },
+      {
+        id: "relation3",
+        prompt: "사람들과 함께하는 시간이 즐겁고 에너지를 줍니다.",
+        dimension: "RELATION",
+      },
+      {
+        id: "relation4",
+        prompt: "나를 있는 그대로 받아들여 주는 사람이 있다고 느낍니다.",
+        dimension: "RELATION",
+        helper: "가족, 친구, 동료 등 누구든 해당됩니다.",
+      },
+    ],
+    dimensions: [
+      {
+        id: "LIFE",
+        label: "삶의 만족",
+        description: "전반적인 삶에 대한 만족감",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "삶에 대한 만족도가 낮은 상태입니다. 현재 불만족의 원인을 구체적으로 파악하고, 변화 가능한 부분부터 개선해 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "삶에 대해 어느 정도 만족하지만 아쉬운 부분이 있습니다. 감사 일기를 쓰며 긍정적 측면을 인식하는 연습을 해 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "삶에 대한 만족도가 높습니다. 이 만족감을 유지하며, 주변 사람들과 긍정적 경험을 나눠 보세요.",
+          },
+        ],
+      },
+      {
+        id: "EMOTION",
+        label: "긍정 정서",
+        description: "일상에서 느끼는 긍정적 감정 빈도",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "긍정적 감정을 느끼는 빈도가 낮습니다. 매일 작은 즐거움(산책, 음악, 취미)을 의도적으로 만들어 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "긍정적 감정이 간헐적으로 나타납니다. 즐거운 활동을 루틴화하면 긍정 정서의 빈도를 높일 수 있습니다.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "일상에서 긍정적 감정을 자주 느끼고 있습니다. 이 감정을 음미하고 기록하면 행복감이 더 오래 유지됩니다.",
+          },
+        ],
+      },
+      {
+        id: "MEANING",
+        label: "삶의 의미",
+        description: "목적의식과 의미감",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "삶의 목적이나 의미를 찾기 어려운 상태입니다. 자신의 가치관과 강점을 탐색하는 시간을 가져 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "어느 정도 의미감이 있지만 더 깊은 목적의식을 원할 수 있습니다. 봉사활동이나 창작 등 의미 있는 활동을 시도해 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "삶에서 분명한 목적과 의미를 느끼고 있습니다. 이 의미감이 주변 사람들에게도 영감을 줄 수 있습니다.",
+          },
+        ],
+      },
+      {
+        id: "RELATION",
+        label: "관계 만족",
+        description: "인간관계에서 느끼는 행복감",
+        interpretations: [
+          {
+            min: 1,
+            max: 2.1,
+            label: "낮음",
+            description:
+              "관계에서 만족감이 부족합니다. 신뢰할 수 있는 한 사람과의 관계를 깊이 있게 가꿔 보는 것부터 시작해 보세요.",
+          },
+          {
+            min: 2.1,
+            max: 3.7,
+            label: "보통",
+            description:
+              "기본적인 관계 만족은 있지만 더 깊은 연결을 원할 수 있습니다. 진솔한 대화와 함께하는 시간을 늘려 보세요.",
+          },
+          {
+            min: 3.7,
+            max: 5.1,
+            label: "높음",
+            description:
+              "관계에서 높은 행복감을 느끼고 있습니다. 이 소중한 관계를 지속적으로 돌보며 유지해 주세요.",
+          },
+        ],
+      },
+    ],
+    resultNote:
+      "행복은 여러 요소가 조화를 이루는 상태입니다. 각 영역의 균형을 살펴보고, 상대적으로 낮은 영역부터 작은 변화를 시도해보세요.",
+  },
 ];
 
 export function getAssessmentBySlug(slug: string) {

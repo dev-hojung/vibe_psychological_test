@@ -1,23 +1,22 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import type { TravelTrainTest } from "@/lib/travel-train";
-import { findTravelProfile } from "@/lib/travel-train";
+import type { LoveTypeTest } from "@/lib/love-type";
+import { findLoveProfile } from "@/lib/love-type";
 
-type Props = { test: TravelTrainTest };
+type Props = { test: LoveTypeTest };
 
-export default function TravelTrainRunner({ test }: Props) {
+export default function LoveTypeRunner({ test }: Props) {
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showResult, setShowResult] = useState(false);
 
   const question = test.questions[currentQ];
   const totalQ = test.questions.length;
-  const progress = Math.round((Object.keys(answers).length / totalQ) * 100);
 
   const profile = useMemo(() => {
     if (!showResult) return null;
-    return findTravelProfile(answers, test.questions, test.resultProfiles);
+    return findLoveProfile(answers, test.questions, test.resultProfiles);
   }, [showResult, answers, test]);
 
   const handleAnswer = (optionId: string) => {
@@ -39,8 +38,8 @@ export default function TravelTrainRunner({ test }: Props) {
     return (
       <div className="space-y-6">
         {/* Result Header */}
-        <div className="rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 p-6 sm:p-8 text-center text-white">
-          <p className="text-sm font-medium text-white/80 mb-2">당신의 여행 열차는...</p>
+        <div className="rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 p-6 sm:p-8 text-center text-white">
+          <p className="text-sm font-medium text-white/80 mb-2">나의 연애 유형은...</p>
           <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">{profile.label}</h2>
           <p className="text-white/90">{profile.caption}</p>
         </div>
@@ -53,11 +52,11 @@ export default function TravelTrainRunner({ test }: Props) {
           </div>
         )}
 
-        {/* Travel Style */}
-        {profile.travelStyle && (
+        {/* Love Style */}
+        {profile.loveStyle && (
           <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-2">여행 스타일</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">{profile.travelStyle}</p>
+            <h3 className="font-bold text-gray-900 mb-2">나의 사랑 방식</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">{profile.loveStyle}</p>
           </div>
         )}
 
@@ -68,7 +67,7 @@ export default function TravelTrainRunner({ test }: Props) {
             <ul className="space-y-2">
               {profile.characteristics.map((c, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-500" />
+                  <span className="mt-0.5 text-rose-400">♥</span>
                   {c}
                 </li>
               ))}
@@ -76,31 +75,31 @@ export default function TravelTrainRunner({ test }: Props) {
           </div>
         )}
 
-        {/* Recommended Destinations */}
-        {profile.recommendedDestinations && profile.recommendedDestinations.length > 0 && (
+        {/* Compatible Types */}
+        {profile.compatibleTypes && profile.compatibleTypes.length > 0 && (
           <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-3">추천 여행지</h3>
+            <h3 className="font-bold text-gray-900 mb-3">잘 맞는 유형</h3>
             <div className="flex flex-wrap gap-2">
-              {profile.recommendedDestinations.map((d, i) => (
+              {profile.compatibleTypes.map((t, i) => (
                 <span
                   key={i}
-                  className="rounded-full bg-cyan-50 px-3 py-1.5 text-xs font-medium text-cyan-700"
+                  className="rounded-full bg-rose-50 px-3 py-1.5 text-xs font-medium text-rose-700"
                 >
-                  {d}
+                  {t}
                 </span>
               ))}
             </div>
           </div>
         )}
 
-        {/* Travel Tips */}
-        {profile.travelTips && profile.travelTips.length > 0 && (
+        {/* Love Tips */}
+        {profile.loveTips && profile.loveTips.length > 0 && (
           <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-3">여행 팁</h3>
+            <h3 className="font-bold text-gray-900 mb-3">연애 팁</h3>
             <ul className="space-y-2">
-              {profile.travelTips.map((tip, i) => (
+              {profile.loveTips.map((tip, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                  <span className="mt-0.5 text-amber-500">💡</span>
+                  <span className="mt-0.5 text-pink-400">💕</span>
                   {tip}
                 </li>
               ))}
@@ -125,7 +124,7 @@ export default function TravelTrainRunner({ test }: Props) {
                 alert("링크가 복사되었습니다!");
               }
             }}
-            className="flex-1 rounded-xl bg-cyan-600 py-3 text-sm font-semibold text-white hover:bg-cyan-700 transition-colors"
+            className="flex-1 rounded-xl bg-rose-500 py-3 text-sm font-semibold text-white hover:bg-rose-600 transition-colors"
           >
             결과 공유하기
           </button>
@@ -140,11 +139,11 @@ export default function TravelTrainRunner({ test }: Props) {
       <div>
         <div className="flex items-center justify-between text-sm mb-2">
           <span className="font-medium text-gray-700">{currentQ + 1} / {totalQ}</span>
-          <span className="text-gray-500">{progress}%</span>
+          <span className="text-gray-500">{Math.round((Object.keys(answers).length / totalQ) * 100)}%</span>
         </div>
         <div className="h-2 w-full rounded-full bg-gray-100 overflow-hidden">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-300"
+            className="h-full rounded-full bg-gradient-to-r from-rose-400 to-pink-500 transition-all duration-300"
             style={{
               width: `${((currentQ + (answers[question?.id] ? 1 : 0)) / totalQ) * 100}%`,
             }}
@@ -165,15 +164,15 @@ export default function TravelTrainRunner({ test }: Props) {
             onClick={() => handleAnswer(opt.id)}
             className={`w-full rounded-xl border-2 p-5 text-left text-base font-medium transition-all ${
               answers[question.id] === opt.id
-                ? "border-cyan-500 bg-cyan-50 text-cyan-700 shadow-md"
-                : "border-gray-200 bg-white text-gray-700 hover:border-cyan-300 hover:bg-cyan-50/50"
+                ? "border-rose-400 bg-rose-50 text-rose-700 shadow-md"
+                : "border-gray-200 bg-white text-gray-700 hover:border-rose-300 hover:bg-rose-50/50"
             }`}
           >
             <span className="inline-flex items-center gap-3">
               <span
                 className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-sm font-bold ${
                   answers[question.id] === opt.id
-                    ? "border-cyan-500 bg-cyan-500 text-white"
+                    ? "border-rose-400 bg-rose-400 text-white"
                     : "border-gray-300 text-gray-400"
                 }`}
               >
@@ -197,7 +196,7 @@ export default function TravelTrainRunner({ test }: Props) {
         <span className="text-xs text-gray-400">
           {currentQ + 1} / {totalQ}
         </span>
-        <div className="w-16" /> {/* Spacer */}
+        <div className="w-16" />
       </div>
     </div>
   );

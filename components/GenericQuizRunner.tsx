@@ -1,12 +1,71 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import type { TravelTrainTest } from "@/lib/travel-train";
-import { findTravelProfile } from "@/lib/travel-train";
 
-type Props = { test: TravelTrainTest };
+type QuizOption = {
+  id: string;
+  text: string;
+  scores: Record<string, number>;
+};
 
-export default function TravelTrainRunner({ test }: Props) {
+type QuizQuestion = {
+  id: string;
+  text: string;
+  options: QuizOption[];
+};
+
+type QuizProfile = {
+  id: string;
+  label: string;
+  caption: string;
+  description?: string;
+  characteristics?: string[];
+  [key: string]: unknown;
+};
+
+type QuizTheme = {
+  progressGradient: string;
+  headerGradient: string;
+  optionActiveClass: string;
+  bulletColor: string;
+  shareButtonClass: string;
+};
+
+type GenericQuizTest = {
+  id: string;
+  title: string;
+  description: string;
+  questions: QuizQuestion[];
+  resultProfiles: QuizProfile[];
+};
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+type Props = {
+  test: GenericQuizTest;
+  findProfile: (
+    answers: Record<string, string>,
+    questions: any[],
+    profiles: any[]
+  ) => QuizProfile | null;
+  theme?: Partial<QuizTheme>;
+  renderExtra?: (profile: QuizProfile) => React.ReactNode;
+};
+
+const defaultTheme: QuizTheme = {
+  progressGradient: "from-indigo-500 to-purple-500",
+  headerGradient: "from-indigo-600 to-purple-600",
+  optionActiveClass: "border-indigo-500 bg-indigo-50 text-indigo-700",
+  bulletColor: "bg-indigo-500",
+  shareButtonClass: "bg-indigo-600 hover:bg-indigo-700",
+};
+
+export default function GenericQuizRunner({
+  test,
+  findProfile,
+  theme: themeOverride,
+  renderExtra,
+}: Props) {
+  const theme = { ...defaultTheme, ...themeOverride };
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showResult, setShowResult] = useState(false);
@@ -17,8 +76,8 @@ export default function TravelTrainRunner({ test }: Props) {
 
   const profile = useMemo(() => {
     if (!showResult) return null;
-    return findTravelProfile(answers, test.questions, test.resultProfiles);
-  }, [showResult, answers, test]);
+    return findProfile(answers, test.questions, test.resultProfiles);
+  }, [showResult, answers, test, findProfile]);
 
   const handleAnswer = (optionId: string) => {
     setAnswers((prev) => ({ ...prev, [question.id]: optionId }));
@@ -37,27 +96,27 @@ export default function TravelTrainRunner({ test }: Props) {
 
   if (showResult && profile) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 animate-fade-in-up">
         {/* Result Header */}
-        <div className="rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 p-6 sm:p-8 text-center text-white">
-          <p className="text-sm font-medium text-white/80 mb-2">당신의 여행 열차는...</p>
-          <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">{profile.label}</h2>
+        <div
+          className={`rounded-2xl bg-gradient-to-br ${theme.headerGradient} p-6 sm:p-8 text-center text-white`}
+        >
+          <p className="text-sm font-medium text-white/80 mb-2">
+            당신의 유형은...
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">
+            {profile.label}
+          </h2>
           <p className="text-white/90">{profile.caption}</p>
         </div>
 
         {/* Description */}
         {profile.description && (
           <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-2">프로필 설명</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">{profile.description}</p>
-          </div>
-        )}
-
-        {/* Travel Style */}
-        {profile.travelStyle && (
-          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-2">여행 스타일</h3>
-            <p className="text-sm text-gray-600 leading-relaxed">{profile.travelStyle}</p>
+            <h3 className="font-bold text-gray-900 mb-2">유형 설명</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              {profile.description}
+            </p>
           </div>
         )}
 
@@ -66,9 +125,14 @@ export default function TravelTrainRunner({ test }: Props) {
           <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
             <h3 className="font-bold text-gray-900 mb-3">주요 특성</h3>
             <ul className="space-y-2">
-              {profile.characteristics.map((c, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-500" />
+              {profile.characteristics.map((c: string, i: number) => (
+                <li
+                  key={i}
+                  className="flex items-start gap-2 text-sm text-gray-600"
+                >
+                  <span
+                    className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${theme.bulletColor}`}
+                  />
                   {c}
                 </li>
               ))}
@@ -76,37 +140,8 @@ export default function TravelTrainRunner({ test }: Props) {
           </div>
         )}
 
-        {/* Recommended Destinations */}
-        {profile.recommendedDestinations && profile.recommendedDestinations.length > 0 && (
-          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-3">추천 여행지</h3>
-            <div className="flex flex-wrap gap-2">
-              {profile.recommendedDestinations.map((d, i) => (
-                <span
-                  key={i}
-                  className="rounded-full bg-cyan-50 px-3 py-1.5 text-xs font-medium text-cyan-700"
-                >
-                  {d}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Travel Tips */}
-        {profile.travelTips && profile.travelTips.length > 0 && (
-          <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-            <h3 className="font-bold text-gray-900 mb-3">여행 팁</h3>
-            <ul className="space-y-2">
-              {profile.travelTips.map((tip, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                  <span className="mt-0.5 text-amber-500">💡</span>
-                  {tip}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* Extra content rendered by parent */}
+        {renderExtra && renderExtra(profile)}
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-3">
@@ -119,13 +154,16 @@ export default function TravelTrainRunner({ test }: Props) {
           <button
             onClick={() => {
               if (navigator.share) {
-                navigator.share({ title: test.title, url: window.location.href });
+                navigator.share({
+                  title: `${test.title} 결과: ${profile.label}`,
+                  url: window.location.href,
+                });
               } else {
                 navigator.clipboard.writeText(window.location.href);
                 alert("링크가 복사되었습니다!");
               }
             }}
-            className="flex-1 rounded-xl bg-cyan-600 py-3 text-sm font-semibold text-white hover:bg-cyan-700 transition-colors"
+            className={`flex-1 rounded-xl py-3 text-sm font-semibold text-white transition-colors ${theme.shareButtonClass}`}
           >
             결과 공유하기
           </button>
@@ -139,15 +177,15 @@ export default function TravelTrainRunner({ test }: Props) {
       {/* Progress */}
       <div>
         <div className="flex items-center justify-between text-sm mb-2">
-          <span className="font-medium text-gray-700">{currentQ + 1} / {totalQ}</span>
+          <span className="font-medium text-gray-700">
+            {currentQ + 1} / {totalQ}
+          </span>
           <span className="text-gray-500">{progress}%</span>
         </div>
         <div className="h-2 w-full rounded-full bg-gray-100 overflow-hidden">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-300"
-            style={{
-              width: `${((currentQ + (answers[question?.id] ? 1 : 0)) / totalQ) * 100}%`,
-            }}
+            className={`h-full rounded-full bg-gradient-to-r ${theme.progressGradient} transition-all duration-300`}
+            style={{ width: `${progress}%` }}
           />
         </div>
       </div>
@@ -165,15 +203,15 @@ export default function TravelTrainRunner({ test }: Props) {
             onClick={() => handleAnswer(opt.id)}
             className={`w-full rounded-xl border-2 p-5 text-left text-base font-medium transition-all ${
               answers[question.id] === opt.id
-                ? "border-cyan-500 bg-cyan-50 text-cyan-700 shadow-md"
-                : "border-gray-200 bg-white text-gray-700 hover:border-cyan-300 hover:bg-cyan-50/50"
+                ? `${theme.optionActiveClass} shadow-md`
+                : "border-gray-200 bg-white text-gray-700 hover:border-gray-300"
             }`}
           >
             <span className="inline-flex items-center gap-3">
               <span
                 className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-sm font-bold ${
                   answers[question.id] === opt.id
-                    ? "border-cyan-500 bg-cyan-500 text-white"
+                    ? "border-current bg-current text-white"
                     : "border-gray-300 text-gray-400"
                 }`}
               >
@@ -197,7 +235,7 @@ export default function TravelTrainRunner({ test }: Props) {
         <span className="text-xs text-gray-400">
           {currentQ + 1} / {totalQ}
         </span>
-        <div className="w-16" /> {/* Spacer */}
+        <div className="w-16" />
       </div>
     </div>
   );

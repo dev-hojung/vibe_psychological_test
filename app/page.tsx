@@ -1,163 +1,108 @@
-import type { Metadata } from "next";
+import { tests } from "@/lib/tests";
+import {
+  generateOrganizationSchema,
+  generateWebsiteSchema,
+} from "@/lib/seo";
+import TestCard from "@/components/TestCard";
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import Link from "next/link";
-import Script from "next/script";
-import { getFeaturedTests } from "@/lib/tests";
-import { generateOrganizationSchema, generateWebsiteSchema } from "@/lib/seo";
 
-const featuredTests = getFeaturedTests(3);
-
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://psychology-lab.example";
-
-export const metadata: Metadata = {
-  title: "심심풀이 심리 테스트 | 성격 테스트 무료",
-  description:
-    "심심할 때 해보는 무료 심리 테스트와 성격 테스트. 스트레스 체크, 진로 가치관 탐색, 애착 유형, 리더십 진단 등 다양한 심심풀이 테스트를 제공합니다. 전문적인 심리 검사로 자기 이해를 깊이 파악하세요.",
-  keywords: [
-    "심리 테스트",
-    "성격 테스트",
-    "심심풀이",
-    "심심풀이 테스트",
-    "무료 심리 테스트",
-    "온라인 심리 검사",
-    "심리 검사",
-    "성향 테스트",
-  ],
-  openGraph: {
-    title: "심심풀이 심리 테스트 | 성격 테스트 무료",
-    description:
-      "심심할 때 해보는 무료 심리 테스트와 성격 테스트. 다양한 심심풀이 테스트를 제공합니다.",
-    url: siteUrl,
-    type: "website",
-  },
-  alternates: {
-    canonical: siteUrl,
-  },
-};
-
-export default function Home() {
-  const organizationSchema = generateOrganizationSchema();
-  const websiteSchema = generateWebsiteSchema();
+export default function HomePage() {
+  const orgSchema = generateOrganizationSchema();
+  const webSchema = generateWebsiteSchema();
 
   return (
-    <div className="min-h-screen bg-slate-950/4 dark:bg-slate-950">
-      <Script
-        id="organization-schema"
+    <>
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema),
+          __html: JSON.stringify([orgSchema, webSchema]),
         }}
       />
-      <Script
-        id="website-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(websiteSchema),
-        }}
-      />
-      <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-16 px-6 py-16 sm:px-12 lg:px-16">
-        <section id="recommended-tests" className="space-y-6">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
-                인기 심심풀이 심리 테스트
-              </h1>
-              <p className="text-sm text-slate-600 dark:text-slate-300">
-                심심할 때 해보는 무료 성격 테스트와 심리 테스트를 제공합니다. 가장 많이 찾는 심심풀이 검사 3가지를 먼저 소개드릴게요. 더 많은 심리 테스트는 전체 보기에서 확인할 수 있습니다.
-              </p>
-            </div>
+      <Header />
+      <main className="min-h-screen">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-40" />
+          <div className="relative mx-auto max-w-5xl px-4 py-20 sm:px-6 sm:py-28 lg:py-36 text-center">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">
+              나를 알아가는 시간
+            </h1>
+            <p className="text-base sm:text-lg text-white/90 max-w-2xl mx-auto mb-8 leading-relaxed">
+              심심할 때 가볍게 해보는 무료 심리 테스트.
+              <br className="hidden sm:block" />
+              스트레스 체크부터 성격 유형, 진로 탐색까지 다양한 테스트를
+              즐겨보세요.
+            </p>
             <Link
               href="/tests"
-              className="inline-flex items-center justify-center rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-bold text-indigo-700 shadow-lg transition-all hover:shadow-xl hover:scale-105 active:scale-100"
             >
-              전체 테스트 이동
+              테스트 시작하기
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.5}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
             </Link>
           </div>
+        </section>
 
-          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {featuredTests.map((item) => (
-              <article
-                key={item.slug}
-                className="flex h-full flex-col justify-between rounded-3xl border border-slate-100 bg-white/80 p-6 shadow-lg shadow-slate-900/5 backdrop-blur transition hover:-translate-y-1 hover:shadow-xl dark:border-slate-800 dark:bg-slate-900/60"
-              >
-                <div className="space-y-3">
-                  <span className="inline-flex w-fit items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
-                    {item.category}
-                  </span>
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-300">
-                    {item.tagline}
-                  </p>
-                </div>
-                <div className="mt-4 flex flex-col gap-4">
-                  <div className="flex gap-3 text-xs text-slate-500 dark:text-slate-400">
-                    <span className="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 font-semibold text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-200">
-                      {item.meta.duration} · {item.meta.questionCount}문항
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-2 text-xs">
-                    {item.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-200"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                  <Link
-                    href={`/tests/${item.slug}/take`}
-                    className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500"
-                  >
-                    상세 살펴보기
-                  </Link>
-                </div>
-              </article>
+        {/* Tests Grid */}
+        <section className="mx-auto max-w-5xl px-4 sm:px-6 pb-16">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+              인기 심리 테스트
+            </h2>
+            <p className="text-gray-500 text-sm sm:text-base">
+              자신을 더 깊이 이해하는 첫 걸음을 시작하세요
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {tests.map((test) => (
+              <TestCard
+                key={test.slug}
+                slug={test.slug}
+                title={test.title}
+                tagline={test.tagline}
+                category={test.category}
+                duration={test.meta.duration}
+                questionCount={test.meta.questionCount}
+                tags={test.tags}
+              />
             ))}
           </div>
         </section>
 
-        <section className="rounded-3xl border border-slate-100 bg-white/70 p-8 shadow-lg shadow-slate-900/5 backdrop-blur dark:border-slate-800 dark:bg-slate-900/60">
-          <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-            어떻게 활용할 수 있나요?
-          </h2>
-          <div className="mt-4 grid gap-6 sm:grid-cols-3">
-            <div>
-              <h3 className="text-sm font-semibold text-indigo-600 dark:text-indigo-300">
-                1. 목적 정리
-              </h3>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                자기 이해, 관계 개선, 커리어 탐색 등 원하는 목표를 선택하면 맞춤
-                추천을 제공합니다.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-indigo-600 dark:text-indigo-300">
-                2. 검사 선택
-              </h3>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                테스트 카드에서 소요 시간과 문항 수를 확인하고, 상황에 맞는
-                검사를 바로 시작하세요.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-indigo-600 dark:text-indigo-300">
-                3. 인사이트 실행
-              </h3>
-              <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-                결과 리포트와 후속 자료를 활용해 다음 행동으로 이어질 수 있도록
-                지원합니다.
-              </p>
-            </div>
+        {/* CTA Section */}
+        <section className="bg-gray-50 py-16">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">
+              더 많은 테스트가 준비되어 있어요
+            </h2>
+            <p className="text-gray-500 text-sm mb-6">
+              정기적으로 새로운 심리 테스트가 업데이트됩니다
+            </p>
+            <Link
+              href="/tests"
+              className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-indigo-700 transition-colors"
+            >
+              전체 테스트 보기
+            </Link>
           </div>
         </section>
-
-        <footer className="pb-10 text-center text-xs text-slate-500 dark:text-slate-400">
-          © {new Date().getFullYear()} Psychological Test Lab. 모든 권리 보유.
-        </footer>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }

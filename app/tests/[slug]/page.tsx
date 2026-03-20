@@ -1,183 +1,216 @@
-import { Metadata } from "next";
+import { tests, getTestBySlug } from "@/lib/tests";
+import { generateTestSchema, generateBreadcrumbSchema } from "@/lib/seo";
+
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import Link from "next/link";
-import Script from "next/script";
 import { notFound } from "next/navigation";
-import { getAssessmentBySlug } from "@/lib/assessments";
-import { getTestBySlug, tests } from "@/lib/tests";
-import { generateBreadcrumbSchema, generateTestSchema } from "@/lib/seo";
+import type { Metadata } from "next";
 
-type PageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://vibe-psychological-test.vercel.app";
 
-export function generateStaticParams() {
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateStaticParams() {
   return tests.map((test) => ({ slug: test.slug }));
 }
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://psychology-lab.example";
-
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const test = getTestBySlug(slug);
-
-  if (!test) {
-    return {
-      title: "테스트를 찾을 수 없습니다",
-    };
-  }
-
-  const url = `${siteUrl}/tests/${slug}`;
+  if (!test) return {};
 
   return {
-    title: `${test.title} | 심심풀이 심리 테스트`,
-    description: `${test.summary} 심심풀이 심리 테스트와 성격 테스트로 자기 이해를 깊이 파악하세요.`,
-    keywords: [
-      ...test.tags,
-      "심리 테스트",
-      "성격 테스트",
-      "심심풀이",
-      "심심풀이 테스트",
-      "무료 심리 테스트",
-    ],
+    title: test.title,
+    description: test.summary,
     openGraph: {
-      title: `${test.title} | 심심풀이 심리 테스트`,
-      description: `${test.summary} 무료 온라인 심리 검사와 성격 테스트를 제공합니다.`,
-      url,
-      type: "website",
-      images: [
-        {
-          url: `${siteUrl}/og-image.png`,
-          width: 1200,
-          height: 630,
-          alt: test.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${test.title} | 심심풀이 심리 테스트`,
-      description: `${test.summary} 무료 온라인 심리 검사와 성격 테스트를 제공합니다.`,
-      images: [`${siteUrl}/og-image.png`],
-    },
-    alternates: {
-      canonical: url,
+      title: `${test.title} | 심심풀이 심리테스트`,
+      description: test.summary,
+      url: `${siteUrl}/tests/${test.slug}`,
+      type: "article",
     },
   };
 }
 
-export default async function TestDetailPage({ params }: PageProps) {
+const categoryColors: Record<string, string> = {
+  "정서 관리": "bg-rose-100 text-rose-700",
+  "커리어 개발": "bg-blue-100 text-blue-700",
+  대인관계: "bg-purple-100 text-purple-700",
+  "조직 리더십": "bg-amber-100 text-amber-700",
+  "자기 개발": "bg-emerald-100 text-emerald-700",
+  라이프스타일: "bg-cyan-100 text-cyan-700",
+};
+
+export default async function TestDetailPage({ params }: Props) {
   const { slug } = await params;
   const test = getTestBySlug(slug);
-
-  if (!test) {
-    notFound();
-  }
-
-  // 여행 스타일 테스트는 별도 처리 (assessment 불필요)
-  const hasAssessment =
-    slug === "travel-train" || getAssessmentBySlug(test.slug);
+  if (!test) notFound();
 
   const testSchema = generateTestSchema(test);
-  const breadcrumbSchema = generateBreadcrumbSchema([
+  const breadcrumb = generateBreadcrumbSchema([
     { name: "홈", url: siteUrl },
     { name: "전체 테스트", url: `${siteUrl}/tests` },
-    { name: test.title, url: `${siteUrl}/tests/${slug}` },
+    { name: test.title, url: `${siteUrl}/tests/${test.slug}` },
   ]);
 
+  const colorClass =
+    categoryColors[test.category] || "bg-gray-100 text-gray-700";
+
   return (
-    <div className="min-h-screen bg-slate-950/6 dark:bg-slate-950">
-      <Script
-        id="test-schema"
+    <>
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(testSchema),
+          __html: JSON.stringify([testSchema, breadcrumb]),
         }}
       />
-      <Script
-        id="breadcrumb-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbSchema),
-        }}
-      />
-      <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-16 px-6 py-16 sm:px-10 lg:px-12">
-        <section className="space-y-6 rounded-3xl bg-gradient-to-br from-indigo-900 via-slate-900 to-slate-800 p-10 text-white shadow-xl shadow-indigo-500/20">
-          <div className="flex flex-wrap items-center gap-3 text-xs">
-            <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 font-semibold text-indigo-100">
-              {test.category}
-            </span>
-            <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 font-semibold text-indigo-100">
-              {test.meta.duration} · {test.meta.questionCount}문항
-            </span>
-            {test.meta.recommendedCadence ? (
-              <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 font-semibold text-indigo-100">
-                추천 주기: {test.meta.recommendedCadence}
-              </span>
-            ) : null}
-          </div>
-          <div className="space-y-4">
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+      <Header />
+      <main className="min-h-screen bg-gray-50">
+        {/* Breadcrumb */}
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 pt-6">
+          <nav className="flex items-center gap-2 text-sm text-gray-500 flex-wrap">
+            <Link
+              href="/"
+              className="hover:text-indigo-600 transition-colors"
+            >
+              홈
+            </Link>
+            <span>/</span>
+            <Link
+              href="/tests"
+              className="hover:text-indigo-600 transition-colors"
+            >
+              전체 테스트
+            </Link>
+            <span>/</span>
+            <span className="text-gray-900 font-medium truncate">
               {test.title}
-            </h1>
-            <p className="max-w-3xl text-base leading-relaxed text-indigo-100 sm:text-lg">
-              {test.tagline}
-            </p>
+            </span>
+          </nav>
+        </div>
+
+        {/* Hero */}
+        <section className="mx-auto max-w-3xl px-4 sm:px-6 pt-6 pb-8">
+          <span
+            className={`inline-block rounded-full px-3 py-1 text-xs font-semibold mb-4 ${colorClass}`}
+          >
+            {test.category}
+          </span>
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 mb-3">
+            {test.title}
+          </h1>
+          <p className="text-base sm:text-lg text-gray-600 mb-4">
+            {test.tagline}
+          </p>
+          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
+            <span className="flex items-center gap-1.5">
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              소요시간 {test.meta.duration}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              {test.meta.questionCount}문항
+            </span>
+            {test.meta.recommendedCadence && (
+              <span className="flex items-center gap-1.5">
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+                {test.meta.recommendedCadence}
+              </span>
+            )}
           </div>
-          <div className="flex flex-wrap gap-2 text-xs text-indigo-100">
+          <div className="flex flex-wrap gap-2 mt-4">
             {test.tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 font-medium"
+                className="rounded-md bg-gray-100 px-2.5 py-1 text-xs text-gray-500"
               >
                 #{tag}
               </span>
             ))}
           </div>
-          <div className="flex flex-col gap-4 rounded-2xl bg-white/10 p-5 text-sm text-indigo-100 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-2xl">{test.overview}</p>
-            <div className="flex flex-col gap-2 sm:flex-row">
-              {hasAssessment ? (
-                <Link
-                  href={`/tests/${test.slug}/take`}
-                  className="inline-flex items-center justify-center rounded-full bg-white px-4 py-2 font-semibold text-indigo-700 transition hover:bg-indigo-100"
-                >
-                  테스트 시작하기
-                </Link>
-              ) : null}
-              <Link
-                href="/tests"
-                className="inline-flex items-center justify-center rounded-full bg-white/70 px-4 py-2 font-semibold text-indigo-700 transition hover:bg-white/90"
-              >
-                목록으로 돌아가기
-              </Link>
-            </div>
-          </div>
         </section>
 
-        <section className="grid gap-10 rounded-3xl border border-slate-100 bg-white/80 p-10 shadow-lg shadow-slate-900/5 backdrop-blur dark:border-slate-800 dark:bg-slate-900/70">
-          <div className="space-y-3">
-            <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-              검사 구성과 제공 정보
-            </h2>
-            <p className="text-sm text-slate-600 dark:text-slate-300">
-              {test.summary}
-            </p>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {test.sections.map((section) => (
+        {/* CTA */}
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 pb-8">
+          <Link
+            href={`/tests/${test.slug}/take`}
+            className="flex items-center justify-center gap-2 w-full rounded-xl bg-indigo-600 py-4 text-base font-bold text-white shadow-md hover:bg-indigo-700 transition-colors active:scale-[0.98]"
+          >
+            테스트 시작하기
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2.5}
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </Link>
+        </div>
+
+        {/* Overview */}
+        <section className="mx-auto max-w-3xl px-4 sm:px-6 pb-8">
+          <h2 className="text-xl font-bold text-gray-900 mb-3">개요</h2>
+          <p className="text-gray-600 leading-relaxed">{test.overview}</p>
+        </section>
+
+        {/* Sections */}
+        <section className="mx-auto max-w-3xl px-4 sm:px-6 pb-8">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {test.sections.map((section, i) => (
               <div
-                key={section.title}
-                className="rounded-2xl border border-slate-100 bg-white/70 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/60"
+                key={i}
+                className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
               >
-                <h3 className="text-sm font-semibold text-indigo-600 dark:text-indigo-300">
-                  {section.title}
-                </h3>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-600">
+                    {i + 1}
+                  </span>
+                  <h3 className="font-bold text-gray-900">{section.title}</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">
                   {section.description}
                 </p>
               </div>
@@ -185,58 +218,74 @@ export default async function TestDetailPage({ params }: PageProps) {
           </div>
         </section>
 
-        <section className="grid gap-8 lg:grid-cols-2">
-          <div className="rounded-3xl border border-slate-100 bg-white/80 p-8 shadow-lg shadow-slate-900/5 backdrop-blur dark:border-slate-800 dark:bg-slate-900/70">
-            <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
-              이런 분께 추천드려요
-            </h2>
-            <ul className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-300">
-              {test.recommended.map((item) => (
-                <li key={item} className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-indigo-500"></span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="rounded-3xl border border-slate-100 bg-white/80 p-8 shadow-lg shadow-slate-900/5 backdrop-blur dark:border-slate-800 dark:bg-slate-900/70">
-            <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
-              예시 문항 미리 보기
-            </h2>
-            <ul className="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-300">
-              {test.sampleQuestions.map((question) => (
-                <li
-                  key={question}
-                  className="rounded-2xl border border-slate-200 bg-white/60 p-4 dark:border-slate-700 dark:bg-slate-900/60"
-                >
-                  “{question}”
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* Recommended */}
+        <section className="mx-auto max-w-3xl px-4 sm:px-6 pb-8">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">
+            이런 분께 추천합니다
+          </h2>
+          <ul className="space-y-3">
+            {test.recommended.map((item, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600">
+                  <svg
+                    className="w-3 h-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+                <span className="text-gray-700 text-sm">{item}</span>
+              </li>
+            ))}
+          </ul>
         </section>
 
-        <section className="rounded-3xl border border-dashed border-slate-200 bg-white/80 p-8 shadow-inner shadow-slate-900/5 dark:border-slate-700 dark:bg-slate-900/70">
-          <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
-            결과 확인 후 다음 단계
+        {/* Sample Questions */}
+        <section className="mx-auto max-w-3xl px-4 sm:px-6 pb-8">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">
+            미리보기 질문
           </h2>
-          <div className="mt-4 flex flex-col gap-3 text-sm text-slate-600 dark:text-slate-300 sm:flex-row sm:flex-wrap">
-            {test.followUp.map((resource) => (
-              <span
-                key={resource}
-                className="inline-flex items-center rounded-full bg-indigo-50 px-4 py-2 font-medium text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-200"
+          <div className="space-y-3">
+            {test.sampleQuestions.map((q, i) => (
+              <div
+                key={i}
+                className="rounded-lg bg-white border border-gray-200 p-4"
               >
-                {resource}
-              </span>
+                <p className="text-sm text-gray-700">
+                  <span className="font-semibold text-indigo-600 mr-2">
+                    Q{i + 1}.
+                  </span>
+                  {q}
+                </p>
+              </div>
             ))}
           </div>
-          <p className="mt-6 text-xs text-slate-500 dark:text-slate-400">
-            본 검사는 현재 프리뷰 단계이며, 실제 설문 진행 시 결과 리포트와 후속
-            자료 다운로드 기능이 제공됩니다.
-          </p>
+        </section>
+
+        {/* Bottom CTA */}
+        <section className="mx-auto max-w-3xl px-4 sm:px-6 pb-16">
+          <div className="rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-center">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">
+              준비되셨나요?
+            </h2>
+            <p className="text-white/80 text-sm mb-6">
+              약 {test.meta.duration}이면 완료할 수 있습니다
+            </p>
+            <Link
+              href={`/tests/${test.slug}/take`}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-sm font-bold text-indigo-700 shadow-lg hover:shadow-xl hover:scale-105 transition-all active:scale-100"
+            >
+              지금 시작하기
+            </Link>
+          </div>
         </section>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }
