@@ -130,12 +130,25 @@ export default function ColorPsychologyRunner({ test }: Props) {
             다시 하기
           </button>
           <button
-            onClick={() => {
-              if (navigator.share) {
-                navigator.share({ title: test.title, url: window.location.href });
-              } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert("링크가 복사되었습니다!");
+            onClick={async () => {
+              const shareUrl = window.location.href.replace(/\/take\/?$/, "");
+              const shareText = `[${test.title}] 내 결과: ${profile.label}`;
+              try {
+                if (navigator.share) {
+                  await navigator.share({ title: test.title, text: shareText, url: shareUrl });
+                } else {
+                  await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+                  alert("링크가 복사되었습니다!");
+                }
+              } catch (e) {
+                if ((e as DOMException).name !== "AbortError") {
+                  try {
+                    await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+                    alert("링크가 복사되었습니다!");
+                  } catch {
+                    prompt("아래 링크를 복사해주세요:", shareUrl);
+                  }
+                }
               }
             }}
             className="flex-1 rounded-xl py-3 text-sm font-semibold text-white transition-colors"

@@ -89,17 +89,29 @@ export default function AssessmentRunner({ assessment }: Props) {
     setShowResult(false);
   };
 
-  const handleShare = () => {
+  const handleShare = async () => {
     if (!results) return;
+    const shareUrl = window.location.href.replace(/\/take\/?$/, "");
     const summary = results
       .map((r) => `${r.dim.label} ${r.interp?.label ?? ""}`)
       .join(", ");
     const shareText = `[${assessment.title}] 결과: ${summary}`;
-    if (navigator.share) {
-      navigator.share({ title: assessment.title, text: shareText, url: window.location.href });
-    } else {
-      navigator.clipboard.writeText(`${shareText}\n${window.location.href}`);
-      alert("결과가 복사되었습니다!");
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: assessment.title, text: shareText, url: shareUrl });
+      } else {
+        await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+        alert("결과가 복사되었습니다!");
+      }
+    } catch (e) {
+      if ((e as DOMException).name !== "AbortError") {
+        try {
+          await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+          alert("결과가 복사되었습니다!");
+        } catch {
+          prompt("아래 링크를 복사해주세요:", shareUrl);
+        }
+      }
     }
   };
 
