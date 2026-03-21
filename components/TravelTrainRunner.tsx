@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import type { TravelTrainTest } from "@/lib/travel-train";
 import { findTravelProfile } from "@/lib/travel-train";
+import ResultCharacter from "./ResultCharacter";
 
 type Props = { test: TravelTrainTest };
 
@@ -40,6 +41,9 @@ export default function TravelTrainRunner({ test }: Props) {
       <div className="space-y-6">
         {/* Result Header */}
         <div className="rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 p-6 sm:p-8 text-center text-white">
+          <div className="mb-4">
+            <ResultCharacter testSlug="travel-train" profileId={profile.id} size="lg" />
+          </div>
           <p className="text-sm font-medium text-white/80 mb-2">당신의 여행 열차는...</p>
           <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">{profile.label}</h2>
           <p className="text-white/90">{profile.caption}</p>

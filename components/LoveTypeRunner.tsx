@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import type { LoveTypeTest } from "@/lib/love-type";
 import { findLoveProfile } from "@/lib/love-type";
+import ResultCharacter from "./ResultCharacter";
 
 type Props = { test: LoveTypeTest };
 
@@ -39,6 +40,9 @@ export default function LoveTypeRunner({ test }: Props) {
       <div className="space-y-6">
         {/* Result Header */}
         <div className="rounded-2xl bg-gradient-to-br from-rose-500 to-pink-600 p-6 sm:p-8 text-center text-white">
+          <div className="mb-4">
+            <ResultCharacter testSlug="love-style-test" profileId={profile.id} size="lg" />
+          </div>
           <p className="text-sm font-medium text-white/80 mb-2">나의 연애 유형은...</p>
           <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">{profile.label}</h2>
           <p className="text-white/90">{profile.caption}</p>

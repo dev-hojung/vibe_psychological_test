@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import ResultCharacter from "./ResultCharacter";
 
 type QuizOption = {
   id: string;
@@ -101,6 +102,9 @@ export default function GenericQuizRunner({
         <div
           className={`rounded-2xl bg-gradient-to-br ${theme.headerGradient} p-6 sm:p-8 text-center text-white`}
         >
+          <div className="mb-4">
+            <ResultCharacter testSlug={test.id} profileId={profile.id} size="lg" />
+          </div>
           <p className="text-sm font-medium text-white/80 mb-2">
             당신의 유형은...
           </p>

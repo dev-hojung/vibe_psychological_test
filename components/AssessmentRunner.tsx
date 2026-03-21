@@ -321,6 +321,131 @@ const themes: Record<string, AssessmentTheme> = {
       },
     },
   },
+  "inner-child-check": {
+    gradient: "from-purple-400 to-pink-400",
+    accentColor: "purple",
+    accentBg: "bg-purple-50",
+    accentText: "text-purple-600",
+    icon: "🧸",
+    dimIcon: "🌈",
+    overallLevels: {
+      low: {
+        label: "내면 아이 안정",
+        description: "내면의 세 아이가 비교적 건강한 상태입니다. 현재의 자기돌봄을 유지하세요.",
+        tips: ["자유로운 놀이 시간을 꾸준히 가지세요", "감정 표현을 억누르지 마세요", "자신을 있는 그대로 수용하는 연습을 하세요"],
+      },
+      mid: {
+        label: "부분적 돌봄 필요",
+        description: "일부 내면 아이에게 관심이 필요합니다. 높은 점수의 영역을 우선 돌봐주세요.",
+        tips: ["상처받은 내면 아이에게 따뜻한 말을 건네보세요", "과도한 적응 대신 자기 욕구를 표현해보세요", "감정 일기를 써보세요"],
+      },
+      high: {
+        label: "적극적 돌봄 필요",
+        description: "내면 아이들이 많은 돌봄을 필요로 합니다. 전문 상담을 고려해주세요.",
+        tips: ["전문 상담사와 내면 아이 작업을 시작해보세요", "자기 비판을 멈추고 자기 연민을 연습하세요", "안전한 환경에서 감정을 표현하는 시간을 가지세요"],
+      },
+    },
+  },
+  "emotional-resilience": {
+    gradient: "from-teal-500 to-cyan-500",
+    accentColor: "teal",
+    accentBg: "bg-teal-50",
+    accentText: "text-teal-600",
+    icon: "🛡️",
+    dimIcon: "💪",
+    overallLevels: {
+      low: {
+        label: "회복력 취약",
+        description: "감정 회복에 어려움을 겪고 있습니다. 기본적인 감정 조절 훈련부터 시작해보세요.",
+        tips: ["호흡법과 마인드풀니스를 매일 연습하세요", "충동적 행동 대신 10초 멈춤 규칙을 적용하세요", "작은 성공 경험을 기록하며 긍정성을 키우세요"],
+      },
+      mid: {
+        label: "보통 수준의 회복력",
+        description: "기본적인 회복력은 있지만 강한 스트레스에 취약할 수 있습니다.",
+        tips: ["자신만의 감정 회복 루틴을 강화하세요", "감정 일기를 통해 패턴을 파악하세요", "긍정적 리프레이밍 연습을 해보세요"],
+      },
+      high: {
+        label: "높은 회복탄력성",
+        description: "감정을 건강하게 다루고 빠르게 회복하는 능력이 뛰어납니다.",
+        tips: ["이 능력을 유지하면서 주변에도 정서적 지지를 나눠주세요", "새로운 도전으로 회복력을 더 키워보세요", "멘토 역할을 통해 다른 사람에게도 도움을 주세요"],
+      },
+    },
+  },
+  "digital-detox-check": {
+    gradient: "from-green-500 to-emerald-500",
+    accentColor: "green",
+    accentBg: "bg-green-50",
+    accentText: "text-green-600",
+    icon: "📱",
+    dimIcon: "🌿",
+    overallLevels: {
+      low: {
+        label: "건강한 디지털 습관",
+        description: "디지털 기기를 건강하게 사용하고 있습니다. 현재 습관을 유지하세요.",
+        tips: ["현재의 건강한 디지털 습관을 유지하세요", "주변 사람에게도 좋은 습관을 공유하세요", "오프라인 활동을 계속 즐기세요"],
+      },
+      mid: {
+        label: "디지털 습관 주의",
+        description: "디지털 습관이 일상에 부분적 영향을 미치고 있습니다. 의식적 관리가 필요합니다.",
+        tips: ["하루 사용 시간을 기록해보세요", "취침 1시간 전 기기를 내려놓는 습관을 들이세요", "오프라인 취미 활동을 하나 시작해보세요"],
+      },
+      high: {
+        label: "디지털 디톡스 필요",
+        description: "디지털 기기 의존도가 높고 일상에 상당한 영향을 미치고 있습니다.",
+        tips: ["30분 디지털 프리 타임부터 시작하세요", "앱 사용 시간 제한을 설정하세요", "대면 만남과 야외 활동을 의식적으로 늘리세요"],
+      },
+    },
+  },
+  "work-life-balance": {
+    gradient: "from-sky-500 to-blue-500",
+    accentColor: "sky",
+    accentBg: "bg-sky-50",
+    accentText: "text-sky-600",
+    icon: "⚖️",
+    dimIcon: "🏠",
+    overallLevels: {
+      low: {
+        label: "워라밸 불균형",
+        description: "일과 삶의 균형이 크게 흔들려 있습니다. 시급한 개선이 필요합니다.",
+        tips: ["퇴근 후 업무 연락 차단 시간을 정하세요", "주 1회 이상 자기만의 시간을 반드시 확보하세요", "심각한 경우 상사나 HR과 업무량을 상의하세요"],
+      },
+      mid: {
+        label: "부분적 균형",
+        description: "기본적인 균형은 유지하고 있지만 일부 영역에서 개선이 필요합니다.",
+        tips: ["시간 블록킹으로 개인 시간을 확보하세요", "주간 단위로 에너지 회복 시간을 계획하세요", "만족도가 낮은 영역에 집중적으로 변화를 시도하세요"],
+      },
+      high: {
+        label: "건강한 워라밸",
+        description: "일과 삶의 균형이 잘 잡혀 있습니다. 이 상태를 유지하세요.",
+        tips: ["현재 패턴을 유지하면서 질적 향상을 추구하세요", "주변 동료에게도 워라밸 노하우를 공유하세요", "정기적인 점검으로 균형을 모니터링하세요"],
+      },
+    },
+  },
+  "anger-management": {
+    gradient: "from-red-500 to-orange-500",
+    accentColor: "red",
+    accentBg: "bg-red-50",
+    accentText: "text-red-600",
+    icon: "🔥",
+    dimIcon: "🧊",
+    overallLevels: {
+      low: {
+        label: "분노 관리 어려움",
+        description: "분노를 인식하고 표현하고 조절하는 전반적인 영역에서 어려움이 있습니다.",
+        tips: ["화가 날 때 10초 멈추는 연습을 시작하세요", "감정 일기로 분노 패턴을 파악하세요", "전문 분노 관리 프로그램을 고려해보세요"],
+      },
+      mid: {
+        label: "부분적 관리 가능",
+        description: "기본적인 분노 관리는 되지만 특정 상황에서 어려울 수 있습니다.",
+        tips: ["취약한 영역의 대처 전략을 미리 준비하세요", "'나-메시지' 표현법을 연습하세요", "심호흡이나 자리 비우기 등 진정 전략을 익히세요"],
+      },
+      high: {
+        label: "건강한 분노 관리",
+        description: "분노를 잘 인식하고 적절히 표현하며 효과적으로 조절하고 있습니다.",
+        tips: ["이 능력을 유지하면서 성찰의 깊이를 더해보세요", "주변 사람들의 감정 관리도 도와주세요", "갈등 중재자 역할에 도전해보세요"],
+      },
+    },
+  },
 };
 
 const defaultTheme: AssessmentTheme = {
@@ -475,7 +600,18 @@ export default function AssessmentRunner({ assessment }: Props) {
         <div
           className={`rounded-2xl bg-gradient-to-br ${theme.gradient} p-6 sm:p-8 text-center text-white animate-fade-in-up`}
         >
-          <div className="text-4xl mb-3">{theme.icon}</div>
+          <div className="flex justify-center mb-3">
+            <div
+              className="w-24 h-24 rounded-full flex items-center justify-center shadow-lg text-5xl"
+              style={{
+                background: "rgba(255,255,255,0.2)",
+                backdropFilter: "blur(8px)",
+                animation: "bounce 2s infinite",
+              }}
+            >
+              <span className="drop-shadow-md select-none">{theme.icon}</span>
+            </div>
+          </div>
           <p className="text-sm font-medium text-white/70 mb-1">종합 결과</p>
           <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">
             {overallLevel.label}

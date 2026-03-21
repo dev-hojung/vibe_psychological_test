@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import type { ColorTest } from "@/lib/color-psychology";
 import { findColorProfile } from "@/lib/color-psychology";
+import ResultCharacter from "./ResultCharacter";
 
 type Props = { test: ColorTest };
 
@@ -44,11 +45,9 @@ export default function ColorPsychologyRunner({ test }: Props) {
           className="rounded-2xl p-6 sm:p-8 text-center text-white"
           style={{ background: `linear-gradient(135deg, ${hex}cc, ${hex})` }}
         >
-          {/* Color swatch circle */}
-          <div
-            className="mx-auto mb-4 h-20 w-20 rounded-full border-4 border-white/60 shadow-lg"
-            style={{ backgroundColor: hex }}
-          />
+          <div className="mb-4">
+            <ResultCharacter testSlug="color-psychology" profileId={profile.id} size="lg" />
+          </div>
           <p className="text-sm font-medium text-white/80 mb-2">나를 대표하는 색깔은...</p>
           <h2 className="text-2xl sm:text-3xl font-extrabold mb-2">{profile.label}</h2>
           <p className="text-white/90">{profile.caption}</p>
