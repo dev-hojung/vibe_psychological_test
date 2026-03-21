@@ -19,6 +19,11 @@ import {
   creativityTypeTest,
   findCreativityProfile,
 } from "@/lib/creativity-type";
+import { timeManagementTest, findTimeManagementProfile } from "@/lib/time-management-style";
+import { friendshipStyleTest, findFriendshipProfile } from "@/lib/friendship-style";
+import { decisionMakingTest, findDecisionMakingProfile } from "@/lib/decision-making-style";
+import { petPersonalityTest, findPetPersonalityProfile } from "@/lib/pet-personality-match";
+import { socialEnergyTest, findSocialEnergyProfile } from "@/lib/social-energy";
 
 type Props = { slug: string };
 
@@ -245,6 +250,201 @@ export default function QuizRunnerSwitch({ slug }: Props) {
                       {(p.creativeTips as string[]).map((t, i) => (
                         <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
                           <span className="mt-0.5 text-amber-500">✨</span>{t}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            );
+          }}
+        />
+      );
+    case "time-management-style":
+      return (
+        <GenericQuizRunner
+          test={timeManagementTest}
+          findProfile={findTimeManagementProfile}
+          theme={{
+            progressGradient: "from-cyan-500 to-teal-500",
+            headerGradient: "from-cyan-600 to-teal-600",
+            optionActiveClass: "border-cyan-500 bg-cyan-50 text-cyan-700",
+            bulletColor: "bg-cyan-500",
+            shareButtonClass: "bg-cyan-600 hover:bg-cyan-700",
+          }}
+          renderExtra={(profile) => {
+            const p = profile as Record<string, unknown>;
+            return (
+              <>
+                {p.timeStyle && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                    <h3 className="font-bold text-gray-900 mb-2">시간 관리 스타일</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{p.timeStyle as string}</p>
+                  </div>
+                )}
+                {Array.isArray(p.productivityTips) && p.productivityTips.length > 0 && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                    <h3 className="font-bold text-gray-900 mb-3">생산성 팁</h3>
+                    <ul className="space-y-2">
+                      {(p.productivityTips as string[]).map((t, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                          <span className="mt-0.5 text-cyan-500">⏰</span>{t}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            );
+          }}
+        />
+      );
+    case "friendship-style":
+      return (
+        <GenericQuizRunner
+          test={friendshipStyleTest}
+          findProfile={findFriendshipProfile}
+          theme={{
+            progressGradient: "from-pink-500 to-rose-500",
+            headerGradient: "from-pink-600 to-rose-600",
+            optionActiveClass: "border-pink-500 bg-pink-50 text-pink-700",
+            bulletColor: "bg-pink-500",
+            shareButtonClass: "bg-pink-600 hover:bg-pink-700",
+          }}
+          renderExtra={(profile) => {
+            const p = profile as Record<string, unknown>;
+            return (
+              <>
+                {p.friendshipStyle && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                    <h3 className="font-bold text-gray-900 mb-2">우정 스타일</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{p.friendshipStyle as string}</p>
+                  </div>
+                )}
+                {Array.isArray(p.relationshipTips) && p.relationshipTips.length > 0 && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                    <h3 className="font-bold text-gray-900 mb-3">관계 팁</h3>
+                    <ul className="space-y-2">
+                      {(p.relationshipTips as string[]).map((t, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                          <span className="mt-0.5 text-pink-500">💝</span>{t}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            );
+          }}
+        />
+      );
+    case "decision-making-style":
+      return (
+        <GenericQuizRunner
+          test={decisionMakingTest}
+          findProfile={findDecisionMakingProfile}
+          theme={{
+            progressGradient: "from-indigo-500 to-blue-500",
+            headerGradient: "from-indigo-600 to-blue-600",
+            optionActiveClass: "border-indigo-500 bg-indigo-50 text-indigo-700",
+            bulletColor: "bg-indigo-500",
+            shareButtonClass: "bg-indigo-600 hover:bg-indigo-700",
+          }}
+          renderExtra={(profile) => {
+            const p = profile as Record<string, unknown>;
+            return (
+              <>
+                {p.decisionStyle && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                    <h3 className="font-bold text-gray-900 mb-2">의사결정 스타일</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{p.decisionStyle as string}</p>
+                  </div>
+                )}
+                {Array.isArray(p.decisionTips) && p.decisionTips.length > 0 && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                    <h3 className="font-bold text-gray-900 mb-3">결정력 팁</h3>
+                    <ul className="space-y-2">
+                      {(p.decisionTips as string[]).map((t, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                          <span className="mt-0.5 text-indigo-500">🎯</span>{t}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            );
+          }}
+        />
+      );
+    case "pet-personality-match":
+      return (
+        <GenericQuizRunner
+          test={petPersonalityTest}
+          findProfile={findPetPersonalityProfile}
+          theme={{
+            progressGradient: "from-lime-500 to-green-500",
+            headerGradient: "from-lime-600 to-green-600",
+            optionActiveClass: "border-lime-500 bg-lime-50 text-lime-700",
+            bulletColor: "bg-lime-500",
+            shareButtonClass: "bg-lime-600 hover:bg-lime-700",
+          }}
+          renderExtra={(profile) => {
+            const p = profile as Record<string, unknown>;
+            return (
+              <>
+                {p.petStyle && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                    <h3 className="font-bold text-gray-900 mb-2">반려동물 스타일</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{p.petStyle as string}</p>
+                  </div>
+                )}
+                {Array.isArray(p.careTips) && p.careTips.length > 0 && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                    <h3 className="font-bold text-gray-900 mb-3">케어 팁</h3>
+                    <ul className="space-y-2">
+                      {(p.careTips as string[]).map((t, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                          <span className="mt-0.5 text-lime-500">🐾</span>{t}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            );
+          }}
+        />
+      );
+    case "social-energy":
+      return (
+        <GenericQuizRunner
+          test={socialEnergyTest}
+          findProfile={findSocialEnergyProfile}
+          theme={{
+            progressGradient: "from-purple-500 to-violet-500",
+            headerGradient: "from-purple-600 to-violet-600",
+            optionActiveClass: "border-purple-500 bg-purple-50 text-purple-700",
+            bulletColor: "bg-purple-500",
+            shareButtonClass: "bg-purple-600 hover:bg-purple-700",
+          }}
+          renderExtra={(profile) => {
+            const p = profile as Record<string, unknown>;
+            return (
+              <>
+                {p.socialStyle && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                    <h3 className="font-bold text-gray-900 mb-2">소셜 스타일</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{p.socialStyle as string}</p>
+                  </div>
+                )}
+                {Array.isArray(p.energyTips) && p.energyTips.length > 0 && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+                    <h3 className="font-bold text-gray-900 mb-3">에너지 관리 팁</h3>
+                    <ul className="space-y-2">
+                      {(p.energyTips as string[]).map((t, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                          <span className="mt-0.5 text-purple-500">⚡</span>{t}
                         </li>
                       ))}
                     </ul>

@@ -2851,6 +2851,300 @@ export const assessments: Assessment[] = [
     resultNote:
       "행복은 여러 요소가 조화를 이루는 상태입니다. 각 영역의 균형을 살펴보고, 상대적으로 낮은 영역부터 작은 변화를 시도해보세요.",
   },
+
+  // ========== 내면 아이 체크 ==========
+  {
+    slug: "inner-child-check",
+    title: "내면 아이 체크 — 세 가지 아이 유형 진단",
+    intro:
+      "우리 안에는 자유롭고 창의적인 아이, 상처받은 아이, 환경에 적응하려는 아이가 공존합니다. 각 내면 아이의 현재 상태를 살펴봅니다.",
+    instructions:
+      "각 문항을 읽고 평소 자신의 모습에 얼마나 해당하는지 솔직하게 응답해 주세요. 정답은 없으며, 현재 느끼는 대로 표시하면 됩니다.",
+    scale: defaultScale,
+    questions: [
+      { id: "ic_fc1", prompt: "하고 싶은 일이 생기면 주변 시선에 상관없이 즐겁게 도전합니다.", dimension: "FREE_CHILD" },
+      { id: "ic_fc2", prompt: "일상에서 작은 것에도 호기심과 즐거움을 잘 느낍니다.", dimension: "FREE_CHILD" },
+      { id: "ic_fc3", prompt: "감정을 자유롭게 표현하는 것이 자연스럽습니다.", dimension: "FREE_CHILD" },
+      { id: "ic_fc4", prompt: "놀이나 창의적인 활동을 할 때 시간 가는 줄 모릅니다.", dimension: "FREE_CHILD" },
+      { id: "ic_fc5", prompt: "즐거운 일을 하려고 하면 왠지 죄책감이 들거나 불안해집니다.", dimension: "FREE_CHILD", reverse: true },
+      { id: "ic_wc1", prompt: "거절당하거나 비판받으면 실제보다 훨씬 크게 상처를 받습니다.", dimension: "WOUNDED_CHILD" },
+      { id: "ic_wc2", prompt: "어린 시절 받지 못한 인정이나 사랑에 대한 아쉬움이 종종 떠오릅니다.", dimension: "WOUNDED_CHILD" },
+      { id: "ic_wc3", prompt: "나는 충분히 사랑받을 자격이 있다고 느낍니다.", dimension: "WOUNDED_CHILD", reverse: true },
+      { id: "ic_wc4", prompt: "특정 상황에서 갑자기 어린 시절의 불안이나 슬픔이 되살아납니다.", dimension: "WOUNDED_CHILD" },
+      { id: "ic_wc5", prompt: "다른 사람에게 버림받을 것 같은 두려움을 자주 느낍니다.", dimension: "WOUNDED_CHILD" },
+      { id: "ic_ac1", prompt: "다른 사람의 기대에 맞추느라 내 감정을 억누르는 편입니다.", dimension: "ADAPTED_CHILD" },
+      { id: "ic_ac2", prompt: "갈등 상황에서 자신의 의견보다 상대방의 뜻을 먼저 따릅니다.", dimension: "ADAPTED_CHILD" },
+      { id: "ic_ac3", prompt: "실수하지 않기 위해 늘 긴장하며 완벽하게 행동하려 합니다.", dimension: "ADAPTED_CHILD" },
+      { id: "ic_ac4", prompt: "싫은 부탁도 거절하지 못하고 수락하는 경우가 많습니다.", dimension: "ADAPTED_CHILD" },
+      { id: "ic_ac5", prompt: "내가 원하는 것이 무엇인지 분명하게 알고 표현할 수 있습니다.", dimension: "ADAPTED_CHILD", reverse: true },
+    ],
+    dimensions: [
+      {
+        id: "FREE_CHILD",
+        label: "자유로운 아이",
+        description: "자발성, 호기심, 즐거움을 추구하는 내면의 에너지",
+        interpretations: [
+          { min: 1, max: 2.6, label: "억제됨", description: "자유로운 내면 아이가 위축되어 있습니다. 작은 놀이나 취미 활동부터 자신에게 허락해 보세요." },
+          { min: 2.6, max: 3.6, label: "보통", description: "자유로운 에너지가 적당히 살아 있지만, 상황에 따라 억제될 때가 있습니다. 즐거운 활동을 의식적으로 늘려보세요." },
+          { min: 3.6, max: 5.1, label: "활발함", description: "내면의 자유로운 아이가 건강하게 활동하고 있습니다. 이 에너지를 창의적인 영역에 활용해 보세요." },
+        ],
+      },
+      {
+        id: "WOUNDED_CHILD",
+        label: "상처받은 아이",
+        description: "과거 경험에서 비롯된 정서적 상처와 취약성",
+        interpretations: [
+          { min: 1, max: 2.6, label: "안정", description: "과거의 상처가 비교적 잘 치유된 상태입니다. 현재의 안정감을 유지하며 자기돌봄을 이어가세요." },
+          { min: 2.6, max: 3.6, label: "주의", description: "과거의 상처가 특정 상황에서 되살아날 수 있습니다. 감정 일기를 쓰거나 신뢰할 수 있는 사람과 이야기를 나눠보세요." },
+          { min: 3.6, max: 5.1, label: "돌봄 필요", description: "내면의 상처받은 아이가 큰 영향을 미치고 있습니다. 전문 상담을 통해 과거의 경험을 안전하게 다루어 보시길 권합니다." },
+        ],
+      },
+      {
+        id: "ADAPTED_CHILD",
+        label: "적응하는 아이",
+        description: "타인의 기대에 맞추며 자신을 억제하는 경향",
+        interpretations: [
+          { min: 1, max: 2.6, label: "자기주도적", description: "타인의 기대보다 자신의 기준으로 행동하는 편입니다. 관계에서도 건강한 경계를 유지하고 있습니다." },
+          { min: 2.6, max: 3.6, label: "균형 탐색 중", description: "상황에 따라 자기 욕구와 타인의 기대 사이에서 갈등합니다. 거절 연습과 자기 표현 훈련이 도움이 됩니다." },
+          { min: 3.6, max: 5.1, label: "과잉 적응", description: "타인의 기대에 과도하게 맞추고 있어 자기 자신을 잃어가는 느낌이 들 수 있습니다. 자신의 욕구를 먼저 확인하는 연습을 시작해 보세요." },
+        ],
+      },
+    ],
+    resultNote: "내면 아이의 상태는 고정된 것이 아니라 자기 인식과 돌봄을 통해 변화할 수 있습니다. 상처가 큰 영역이 있다면 전문 상담을 고려해 주세요.",
+  },
+
+  // ========== 감정 회복탄력성 체크 ==========
+  {
+    slug: "emotional-resilience",
+    title: "감정 회복탄력성 체크 — 3요소 진단",
+    intro: "감정적으로 흔들린 후 얼마나 빨리, 건강하게 회복하는지를 감정조절, 충동통제, 낙관성 세 가지 축으로 점검합니다.",
+    instructions: "최근 한 달간의 경험을 떠올리며, 각 문항이 자신에게 얼마나 해당하는지 솔직하게 응답해 주세요.",
+    scale: defaultScale,
+    questions: [
+      { id: "er_reg1", prompt: "감정이 격해져도 잠시 멈추고 스스로를 진정시킬 수 있습니다.", dimension: "REGULATE" },
+      { id: "er_reg2", prompt: "스트레스를 받으면 자신만의 감정 해소 방법을 활용합니다.", dimension: "REGULATE" },
+      { id: "er_reg3", prompt: "부정적인 감정에 빠지면 좀처럼 빠져나오기 어렵습니다.", dimension: "REGULATE", reverse: true },
+      { id: "er_reg4", prompt: "감정과 행동을 분리하여 상황에 적절하게 대응할 수 있습니다.", dimension: "REGULATE" },
+      { id: "er_reg5", prompt: "힘든 일이 있어도 일정 시간이 지나면 평소 상태로 돌아옵니다.", dimension: "REGULATE" },
+      { id: "er_imp1", prompt: "화가 나도 즉각적으로 반응하지 않고 생각한 후 행동합니다.", dimension: "IMPULSE" },
+      { id: "er_imp2", prompt: "감정적일 때 충동적으로 말하거나 행동해서 후회한 적이 있습니다.", dimension: "IMPULSE", reverse: true },
+      { id: "er_imp3", prompt: "장기적인 목표를 위해 당장의 유혹을 참을 수 있습니다.", dimension: "IMPULSE" },
+      { id: "er_imp4", prompt: "갈등 상황에서 말이나 행동을 신중하게 선택하는 편입니다.", dimension: "IMPULSE" },
+      { id: "er_imp5", prompt: "기분이 안 좋을 때 과식, 과소비 등 충동적 행동을 하는 편입니다.", dimension: "IMPULSE", reverse: true },
+      { id: "er_opt1", prompt: "어려운 상황에서도 결국 나아질 것이라고 믿습니다.", dimension: "OPTIMISM" },
+      { id: "er_opt2", prompt: "실패를 경험해도 다음에 더 잘할 수 있다고 생각합니다.", dimension: "OPTIMISM" },
+      { id: "er_opt3", prompt: "나쁜 일이 생기면 모든 것이 잘못될 것 같은 느낌이 듭니다.", dimension: "OPTIMISM", reverse: true },
+      { id: "er_opt4", prompt: "힘든 경험에서도 배울 점이나 성장 기회를 찾으려 합니다.", dimension: "OPTIMISM" },
+      { id: "er_opt5", prompt: "미래에 대해 전반적으로 긍정적인 기대를 가지고 있습니다.", dimension: "OPTIMISM" },
+    ],
+    dimensions: [
+      {
+        id: "REGULATE",
+        label: "감정조절",
+        description: "부정적 감정을 인식하고 건강하게 다루는 능력",
+        interpretations: [
+          { min: 1, max: 2.6, label: "조절 어려움", description: "감정 조절에 어려움을 겪고 있습니다. 호흡법, 마인드풀니스 등 감정을 다루는 기본 기술을 연습해 보세요." },
+          { min: 2.6, max: 3.6, label: "보통", description: "기본적인 감정 조절은 가능하지만 강한 스트레스 상황에서는 흔들릴 수 있습니다. 자신만의 회복 루틴을 강화해 보세요." },
+          { min: 3.6, max: 5.1, label: "조절 양호", description: "감정을 안정적으로 다루고 있습니다. 이 능력을 유지하면서 주변 사람들에게도 정서적 지지를 나눠보세요." },
+        ],
+      },
+      {
+        id: "IMPULSE",
+        label: "충동통제",
+        description: "감정적 상황에서 즉각적 반응을 자제하는 능력",
+        interpretations: [
+          { min: 1, max: 2.6, label: "통제 필요", description: "충동적 반응이 잦아 대인관계나 의사결정에 영향을 줄 수 있습니다. '멈추고-생각하고-행동하기' 전략을 연습해 보세요." },
+          { min: 2.6, max: 3.6, label: "보통", description: "대체로 통제하지만 강한 자극에는 충동적으로 반응할 때가 있습니다. 감정 일기를 통해 패턴을 파악해 보세요." },
+          { min: 3.6, max: 5.1, label: "통제 양호", description: "감정적 상황에서도 신중하게 행동하는 편입니다. 이 능력이 자신의 강점임을 인식하고 유지해 나가세요." },
+        ],
+      },
+      {
+        id: "OPTIMISM",
+        label: "낙관성",
+        description: "역경 속에서도 긍정적 관점을 유지하는 성향",
+        interpretations: [
+          { min: 1, max: 2.6, label: "비관적 경향", description: "어려운 상황을 부정적으로 해석하는 경향이 있습니다. 작은 성공 경험을 기록하며 긍정 관점을 연습해 보세요." },
+          { min: 2.6, max: 3.6, label: "보통", description: "상황에 따라 낙관과 비관 사이를 오갑니다. 감사 일기나 긍정 리프레이밍 연습이 도움이 됩니다." },
+          { min: 3.6, max: 5.1, label: "낙관적", description: "어려움 속에서도 성장 가능성을 찾는 편입니다. 이 에너지를 주변에 나누면 관계도 더 풍요로워집니다." },
+        ],
+      },
+    ],
+    resultNote: "감정 회복탄력성은 타고나는 것이 아니라 연습으로 키울 수 있습니다. 낮은 영역이 있다면 작은 훈련부터 시작해 보세요.",
+  },
+
+  // ========== 디지털 디톡스 체크 ==========
+  {
+    slug: "digital-detox-check",
+    title: "디지털 디톡스 체크 — 디지털 습관 진단",
+    intro: "스마트폰과 디지털 기기 사용 습관이 일상에 미치는 영향을 의존도, 습관 영향, 오프라인 활동 세 가지로 점검합니다.",
+    instructions: "최근 2주간의 디지털 기기 사용 패턴을 떠올리며 응답해 주세요. 자신의 습관을 솔직하게 돌아보는 것이 중요합니다.",
+    scale: defaultScale,
+    questions: [
+      { id: "dd_dep1", prompt: "스마트폰 없이 외출하면 심하게 불안하거나 불편합니다.", dimension: "DEPENDENCY" },
+      { id: "dd_dep2", prompt: "특별한 목적 없이 습관적으로 스마트폰을 확인합니다.", dimension: "DEPENDENCY" },
+      { id: "dd_dep3", prompt: "SNS나 영상 시청을 시작하면 예상보다 훨씬 오래 사용하게 됩니다.", dimension: "DEPENDENCY" },
+      { id: "dd_dep4", prompt: "디지털 기기 사용 시간을 스스로 조절할 수 있다고 느낍니다.", dimension: "DEPENDENCY", reverse: true },
+      { id: "dd_imp1", prompt: "디지털 기기 사용으로 수면 시간이 줄거나 수면 질이 나빠졌습니다.", dimension: "IMPACT" },
+      { id: "dd_imp2", prompt: "화면을 오래 보면 눈이 피로하거나 목·어깨가 아픕니다.", dimension: "IMPACT" },
+      { id: "dd_imp3", prompt: "SNS를 보고 나면 비교 심리로 기분이 가라앉을 때가 있습니다.", dimension: "IMPACT" },
+      { id: "dd_imp4", prompt: "디지털 기기 사용이 대면 대화나 관계에 방해가 된 적이 있습니다.", dimension: "IMPACT" },
+      { id: "dd_off1", prompt: "디지털 기기 없이도 충분히 즐길 수 있는 취미가 있습니다.", dimension: "OFFLINE" },
+      { id: "dd_off2", prompt: "자연 속 산책이나 야외 활동을 정기적으로 즐깁니다.", dimension: "OFFLINE" },
+      { id: "dd_off3", prompt: "오프라인에서 사람을 만나고 대화하는 시간을 충분히 갖고 있습니다.", dimension: "OFFLINE" },
+      { id: "dd_off4", prompt: "여가 시간에 할 일이 없으면 바로 스마트폰부터 손에 듭니다.", dimension: "OFFLINE", reverse: true },
+    ],
+    dimensions: [
+      {
+        id: "DEPENDENCY",
+        label: "디지털 의존도",
+        description: "디지털 기기에 대한 심리적·행동적 의존 수준",
+        interpretations: [
+          { min: 1, max: 2.6, label: "건강한 사용", description: "디지털 기기를 필요할 때 적절히 활용하고 있습니다. 현재의 건강한 습관을 유지하세요." },
+          { min: 2.6, max: 3.6, label: "주의 필요", description: "습관적 사용이 늘어나고 있습니다. 사용 시간을 기록하고 의식적으로 줄여보세요." },
+          { min: 3.6, max: 5.1, label: "높은 의존", description: "디지털 기기 없이 불안감을 느끼는 상태입니다. 하루 중 정해진 시간에 기기를 내려놓는 연습부터 시작해 보세요." },
+        ],
+      },
+      {
+        id: "IMPACT",
+        label: "습관 영향",
+        description: "디지털 사용이 신체·정서·관계에 미치는 부정적 영향",
+        interpretations: [
+          { min: 1, max: 2.6, label: "영향 적음", description: "디지털 사용이 일상에 큰 부정적 영향을 주지 않고 있습니다." },
+          { min: 2.6, max: 3.6, label: "부분적 영향", description: "수면이나 신체 건강에 일부 영향이 나타나고 있습니다. 취침 1시간 전 기기 사용을 자제해 보세요." },
+          { min: 3.6, max: 5.1, label: "상당한 영향", description: "건강과 관계에 뚜렷한 부정적 영향이 있습니다. 디지털 디톡스 계획을 구체적으로 세워보세요." },
+        ],
+      },
+      {
+        id: "OFFLINE",
+        label: "오프라인 활동",
+        description: "디지털 기기 외 여가 및 대면 활동의 풍요로움",
+        interpretations: [
+          { min: 1, max: 2.6, label: "오프라인 부족", description: "디지털 기기 외 활동이 부족합니다. 간단한 야외 산책이나 대면 만남부터 늘려보세요." },
+          { min: 2.6, max: 3.6, label: "보통", description: "오프라인 활동이 어느 정도 있지만 더 다양하게 확장할 여지가 있습니다." },
+          { min: 3.6, max: 5.1, label: "활발함", description: "오프라인 활동이 풍요롭습니다. 디지털과 오프라인의 균형이 잘 잡혀 있습니다." },
+        ],
+      },
+    ],
+    resultNote: "디지털 습관은 자각하는 순간부터 변화가 시작됩니다. 의존도가 높거나 영향이 크다면 하루 30분 디지털 프리 타임부터 시작해 보세요.",
+  },
+
+  // ========== 워라밸 균형 진단 ==========
+  {
+    slug: "work-life-balance",
+    title: "워라밸 균형 진단 — 3요소 점검",
+    intro: "일과 삶의 균형을 시간 배분, 에너지 관리, 만족도 세 가지 축으로 점검하여 현재 워라밸 상태를 파악합니다.",
+    instructions: "최근 한 달간의 일상을 떠올리며 각 문항에 솔직하게 응답해 주세요. 자신의 상태를 있는 그대로 인정하는 것이 첫걸음입니다.",
+    scale: defaultScale,
+    questions: [
+      { id: "wlb_t1", prompt: "퇴근 후에도 업무 관련 연락이나 작업을 하는 경우가 많습니다.", dimension: "TIME", reverse: true },
+      { id: "wlb_t2", prompt: "가족이나 친구와 충분한 시간을 보내고 있다고 느낍니다.", dimension: "TIME" },
+      { id: "wlb_t3", prompt: "개인적인 취미나 자기계발에 투자할 시간이 있습니다.", dimension: "TIME" },
+      { id: "wlb_t4", prompt: "업무 때문에 개인적인 약속을 취소하거나 미루는 일이 잦습니다.", dimension: "TIME", reverse: true },
+      { id: "wlb_t5", prompt: "하루 중 오로지 나만을 위한 시간을 확보하고 있습니다.", dimension: "TIME" },
+      { id: "wlb_e1", prompt: "퇴근 후에도 개인 활동을 할 체력이 남아 있습니다.", dimension: "ENERGY" },
+      { id: "wlb_e2", prompt: "주말에도 피로가 풀리지 않아 쉬는 것 외에는 하기 어렵습니다.", dimension: "ENERGY", reverse: true },
+      { id: "wlb_e3", prompt: "업무와 개인 생활 사이에서 에너지를 적절히 분배하고 있습니다.", dimension: "ENERGY" },
+      { id: "wlb_e4", prompt: "규칙적인 운동이나 건강 관리를 실천하고 있습니다.", dimension: "ENERGY" },
+      { id: "wlb_e5", prompt: "충분한 수면을 취하고 있으며 아침에 개운하게 일어납니다.", dimension: "ENERGY" },
+      { id: "wlb_s1", prompt: "현재 일과 삶의 균형에 대해 전반적으로 만족합니다.", dimension: "SATISFACTION" },
+      { id: "wlb_s2", prompt: "일에서 보람을 느끼는 동시에 개인 생활에서도 행복합니다.", dimension: "SATISFACTION" },
+      { id: "wlb_s3", prompt: "지금의 생활 방식을 장기적으로 유지할 수 있을 것 같습니다.", dimension: "SATISFACTION" },
+      { id: "wlb_s4", prompt: "일 때문에 중요한 것들을 포기하고 있다는 느낌이 듭니다.", dimension: "SATISFACTION", reverse: true },
+      { id: "wlb_s5", prompt: "나의 삶 전체를 돌아보면 대체로 잘 살아가고 있다고 느낍니다.", dimension: "SATISFACTION" },
+    ],
+    dimensions: [
+      {
+        id: "TIME",
+        label: "시간 배분",
+        description: "업무와 개인 생활 간 시간 배분의 적절성",
+        interpretations: [
+          { min: 1, max: 2.6, label: "불균형", description: "업무에 시간이 과도하게 치우쳐 있습니다. 개인 시간을 확보하기 위한 경계 설정이 필요합니다." },
+          { min: 2.6, max: 3.6, label: "보통", description: "어느 정도 균형을 유지하고 있지만 업무 과부하 시 흔들릴 수 있습니다. 시간 블록킹 전략을 활용해 보세요." },
+          { min: 3.6, max: 5.1, label: "균형 잡힘", description: "업무와 개인 생활의 시간 배분이 적절합니다. 이 패턴을 유지하면서 질적 향상을 추구해 보세요." },
+        ],
+      },
+      {
+        id: "ENERGY",
+        label: "에너지 관리",
+        description: "신체적·정신적 에너지의 충전과 소모 균형",
+        interpretations: [
+          { min: 1, max: 2.6, label: "고갈 상태", description: "에너지가 심하게 소진되어 있습니다. 수면, 운동, 영양 등 기본 회복부터 챙기세요." },
+          { min: 2.6, max: 3.6, label: "관리 필요", description: "에너지 소모와 충전이 아슬아슬한 균형입니다. 주간 단위로 회복 시간을 계획해 보세요." },
+          { min: 3.6, max: 5.1, label: "활력 충분", description: "에너지를 효율적으로 관리하고 있습니다. 업무와 개인 활동 모두 활력 있게 임할 수 있는 상태입니다." },
+        ],
+      },
+      {
+        id: "SATISFACTION",
+        label: "만족도",
+        description: "일과 삶 전반에 대한 주관적 만족감",
+        interpretations: [
+          { min: 1, max: 2.6, label: "불만족", description: "현재 워라밸에 대한 만족도가 낮습니다. 구체적으로 어떤 부분이 불만인지 정리하고 변화 계획을 세워보세요." },
+          { min: 2.6, max: 3.6, label: "보통", description: "부분적으로 만족하지만 개선 여지가 있습니다. 만족도를 높이는 작은 변화부터 시도해 보세요." },
+          { min: 3.6, max: 5.1, label: "만족", description: "일과 삶에 대해 전반적으로 만족하고 있습니다. 이 상태를 유지하기 위한 지속적인 점검을 권합니다." },
+        ],
+      },
+    ],
+    resultNote: "워라밸은 완벽한 균형이 아니라 자신에게 맞는 적절한 조화를 찾는 것입니다. 낮은 영역이 있다면 작은 변화부터 실험해 보세요.",
+  },
+
+  // ========== 분노 관리 유형 체크 ==========
+  {
+    slug: "anger-management",
+    title: "분노 관리 유형 체크 — 3요소 진단",
+    intro: "분노를 인식하고, 표현하고, 조절하는 과정을 세 가지 축으로 살펴봅니다. 건강한 분노 관리의 첫걸음은 자기 이해입니다.",
+    instructions: "최근 한 달간 화가 났던 상황을 떠올리며 각 문항에 응답해 주세요. 솔직한 응답이 정확한 결과로 이어집니다.",
+    scale: defaultScale,
+    questions: [
+      { id: "am_aw1", prompt: "화가 나기 시작하는 순간을 스스로 빠르게 알아차립니다.", dimension: "AWARENESS" },
+      { id: "am_aw2", prompt: "내가 어떤 상황에서 주로 화가 나는지 잘 알고 있습니다.", dimension: "AWARENESS" },
+      { id: "am_aw3", prompt: "분노의 강도를 단계적으로 구분하여 인식할 수 있습니다.", dimension: "AWARENESS" },
+      { id: "am_aw4", prompt: "화가 날 때 신체 반응(심장 빨라짐, 얼굴 붉어짐 등)을 잘 감지합니다.", dimension: "AWARENESS" },
+      { id: "am_aw5", prompt: "화가 나는 이유를 모른 채 짜증만 느끼는 경우가 많습니다.", dimension: "AWARENESS", reverse: true },
+      { id: "am_ex1", prompt: "화가 나면 상대방에게 공격적인 말이나 행동을 하는 편입니다.", dimension: "EXPRESSION", reverse: true },
+      { id: "am_ex2", prompt: "분노를 느끼면 그 감정을 적절한 말로 표현할 수 있습니다.", dimension: "EXPRESSION" },
+      { id: "am_ex3", prompt: "화가 나도 꾹 참고 아무 말도 하지 않는 편입니다.", dimension: "EXPRESSION", reverse: true },
+      { id: "am_ex4", prompt: "분노의 원인을 상대방에게 차분하게 설명할 수 있습니다.", dimension: "EXPRESSION" },
+      { id: "am_ex5", prompt: "화가 날 때 나의 감정과 요구를 동시에 전달하려 노력합니다.", dimension: "EXPRESSION" },
+      { id: "am_ct1", prompt: "화가 나면 심호흡이나 잠시 자리를 비우는 등 진정 전략을 사용합니다.", dimension: "CONTROL" },
+      { id: "am_ct2", prompt: "분노가 치밀어도 후회할 행동을 하지 않도록 자제할 수 있습니다.", dimension: "CONTROL" },
+      { id: "am_ct3", prompt: "화가 나면 통제력을 잃고 이성적으로 판단하기 어렵습니다.", dimension: "CONTROL", reverse: true },
+      { id: "am_ct4", prompt: "분노를 느낀 후 스스로 감정을 가라앉히는 데 오래 걸리지 않습니다.", dimension: "CONTROL" },
+      { id: "am_ct5", prompt: "분노 상황 후에 무엇이 나를 화나게 했는지 되돌아보는 편입니다.", dimension: "CONTROL" },
+    ],
+    dimensions: [
+      {
+        id: "AWARENESS",
+        label: "분노 인식",
+        description: "분노 감정의 발생과 원인을 자각하는 능력",
+        interpretations: [
+          { min: 1, max: 2.6, label: "인식 부족", description: "분노가 올라오는 순간을 잘 알아차리지 못하고 있습니다. 감정 일기를 써서 자신의 분노 패턴을 파악해 보세요." },
+          { min: 2.6, max: 3.6, label: "보통", description: "분노를 어느 정도 인식하지만 미묘한 신호를 놓칠 때가 있습니다. 신체 반응에 주의를 기울이는 연습이 도움됩니다." },
+          { min: 3.6, max: 5.1, label: "인식 양호", description: "분노의 신호와 원인을 잘 인식하고 있습니다. 이 자각 능력을 건강한 대응으로 연결해 나가세요." },
+        ],
+      },
+      {
+        id: "EXPRESSION",
+        label: "분노 표현",
+        description: "분노를 건강하고 적절하게 전달하는 능력",
+        interpretations: [
+          { min: 1, max: 2.6, label: "표현 어려움", description: "분노를 적절히 표현하는 데 어려움이 있습니다. 공격적 표출이나 지나친 억압 대신 '나-메시지(I-message)' 표현법을 연습해 보세요." },
+          { min: 2.6, max: 3.6, label: "보통", description: "상황에 따라 적절하게 표현할 수 있지만 강한 분노 시에는 어려울 수 있습니다. 비폭력 대화법을 익혀보세요." },
+          { min: 3.6, max: 5.1, label: "건강한 표현", description: "분노를 적절한 방식으로 전달하고 있습니다. 감정과 요구를 동시에 표현하는 능력이 대인관계에 도움이 됩니다." },
+        ],
+      },
+      {
+        id: "CONTROL",
+        label: "분노 조절",
+        description: "분노의 강도를 낮추고 이성적 판단을 유지하는 능력",
+        interpretations: [
+          { min: 1, max: 2.6, label: "조절 어려움", description: "분노 조절에 어려움을 겪고 있습니다. 화가 날 때 즉시 반응하지 않고 10초간 멈추는 연습부터 시작해 보세요." },
+          { min: 2.6, max: 3.6, label: "보통", description: "기본적인 조절은 가능하지만 강한 자극에서는 흔들립니다. 자신만의 진정 전략을 미리 정해두면 도움이 됩니다." },
+          { min: 3.6, max: 5.1, label: "조절 양호", description: "분노를 느껴도 후회 없는 행동을 선택할 수 있습니다. 이 능력을 유지하면서 성찰의 깊이를 더해보세요." },
+        ],
+      },
+    ],
+    resultNote: "분노는 자연스러운 감정이며 건강하게 다루는 것이 핵심입니다. 어려움이 지속된다면 분노 조절 프로그램이나 전문 상담을 고려해 보세요.",
+  },
 ];
 
 export function getAssessmentBySlug(slug: string) {

@@ -19,6 +19,11 @@ const QUIZ_SLUGS = [
   "money-sense",
   "conflict-style",
   "creativity-type",
+  "time-management-style",
+  "friendship-style",
+  "decision-making-style",
+  "pet-personality-match",
+  "social-energy",
 ];
 
 export async function generateStaticParams() {
