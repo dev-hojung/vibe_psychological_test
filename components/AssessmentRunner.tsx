@@ -806,12 +806,12 @@ export default function AssessmentRunner({ assessment }: Props) {
       </div>
 
       {/* Scale buttons */}
-      <div className="flex justify-center gap-2 sm:gap-3">
+      <div className="grid grid-cols-5 gap-1.5 sm:gap-3 w-full">
         {assessment.scale.map((s) => (
           <button
             key={s.value}
             onClick={() => handleAnswer(s.value)}
-            className={`flex flex-col items-center gap-1 rounded-xl border-2 px-3 py-3 sm:px-5 sm:py-4 transition-all ${
+            className={`flex flex-col items-center gap-1 rounded-xl border-2 px-1 py-3 sm:px-5 sm:py-4 transition-all ${
               answers[question.id] === s.value
                 ? "border-indigo-500 bg-indigo-50 shadow-md scale-105"
                 : "border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/50"
@@ -824,7 +824,7 @@ export default function AssessmentRunner({ assessment }: Props) {
             >
               {s.value}
             </span>
-            <span className="text-[10px] sm:text-xs text-gray-500 whitespace-nowrap">{s.label}</span>
+            <span className="text-[8px] sm:text-xs text-gray-500 text-center leading-tight break-keep">{s.label}</span>
           </button>
         ))}
       </div>
