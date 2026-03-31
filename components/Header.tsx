@@ -33,6 +33,18 @@ export default function Header() {
           >
             테스트 목록
           </Link>
+          <Link
+            href="/about"
+            className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors"
+          >
+            소개
+          </Link>
+          <Link
+            href="/faq"
+            className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors"
+          >
+            FAQ
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -69,6 +81,20 @@ export default function Header() {
             className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             테스트 목록
+          </Link>
+          <Link
+            href="/about"
+            onClick={() => setMenuOpen(false)}
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            소개
+          </Link>
+          <Link
+            href="/faq"
+            onClick={() => setMenuOpen(false)}
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            FAQ
           </Link>
         </div>
       )}
