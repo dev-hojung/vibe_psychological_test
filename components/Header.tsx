@@ -34,6 +34,12 @@ export default function Header() {
             테스트 목록
           </Link>
           <Link
+            href="/blog"
+            className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors"
+          >
+            심리학 가이드
+          </Link>
+          <Link
             href="/about"
             className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors"
           >
@@ -81,6 +87,13 @@ export default function Header() {
             className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             테스트 목록
+          </Link>
+          <Link
+            href="/blog"
+            onClick={() => setMenuOpen(false)}
+            className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            심리학 가이드
           </Link>
           <Link
             href="/about"

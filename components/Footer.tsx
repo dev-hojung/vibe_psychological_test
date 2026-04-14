@@ -19,6 +19,10 @@ export default function Footer() {
             소개
           </Link>
           <span className="hidden sm:inline">|</span>
+          <Link href="/blog" className="hover:text-indigo-600 transition-colors">
+            심리학 가이드
+          </Link>
+          <span className="hidden sm:inline">|</span>
           <Link href="/privacy" className="hover:text-indigo-600 transition-colors">
             개인정보처리방침
           </Link>
@@ -29,6 +33,10 @@ export default function Footer() {
           <span className="hidden sm:inline">|</span>
           <Link href="/faq" className="hover:text-indigo-600 transition-colors">
             FAQ
+          </Link>
+          <span className="hidden sm:inline">|</span>
+          <Link href="/contact" className="hover:text-indigo-600 transition-colors">
+            문의하기
           </Link>
         </div>
         <div className="mt-4 text-center text-xs text-gray-400">
